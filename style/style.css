@@ -3,6 +3,15 @@
 html, body{height: 100%;}
 img, picture, video, canvas, svg{display: block; max-width: 100%;}
 a{text-decoration: none;}
+/* 웹폰트 */
+/* 라메르 한글 */
+@font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 
 header .headerTop{
@@ -11,7 +20,7 @@ header .headerTop{
     border: 1px solid tomato;
     position: relative;
 }
-.promotionlist ul{
+.promotionlist > ul{
     display: flex;
     justify-content: center;
     list-style: none;
@@ -23,14 +32,23 @@ header .headerTop{
     position: absolute;
     top: 30%;
 }
-.promotionlistBtn{
-    width: 50px;
-    height: 50px;
+.promotionlistBtn ul{
+    display:flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+.promotionlistBtn li{
     content: '';
+    width: 20px;
+    height: 20px;
     border-top: 5px solid #000;
     border-right: 5px solid #000;
+}
+.promotionlistBtn ul li:nth-child(1){
     transform: rotate(225deg);
-    /* transform: rotate(45deg); 꺽쇠 > */
+}
+.promotionlistBtn ul li:nth-child(2){
+    transform: rotate(45deg);
 }
 
 header .headerBottom{
@@ -38,10 +56,49 @@ header .headerBottom{
     border: 1px solid tomato;
 }
 
+/* 첫페이지 메인 */
+.mainContent_Wrapper{
+    display: flex;
+    justify-content: center;
+}
+.mainContentRight_description{
+    display: flex;
+    flex-direction: column
+}
 
-
-
-
+.title{
+    margin:100px 0 100px 0;
+    font-family: "Cormorant Garamond", serif;
+    /* font-optical-sizing: auto; */
+    font-weight: 700;
+    letter-spacing: -3px;
+    /* font-style:normal; */
+    line-height: 90%;
+    font-size: 75px;
+}
+.introduction{
+    flex-grow: 1;
+    font-size: 20px;
+    color:#666;
+}
+.addComent{
+    flex-grow: 1;
+    font-style:italic;
+    font-size: 13px;
+    color:#666;
+}
+.quickLink a{
+    display: block;
+    padding-bottom: 20px;
+    font-size: 15px;
+    color:#444;
+    text-decoration: underline;
+}
+.bigLogo{
+    flex-grow: 0;
+    /* width: 613px; */
+    /* height: 116px; */
+}
 main section{
     height: 900px;
     border : 1px solid tomato;
