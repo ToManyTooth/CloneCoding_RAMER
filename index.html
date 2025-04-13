@@ -13,6 +13,11 @@
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
             <!-- !!!!!!!!!!!!!!! -->
+            
+            <!-- 파비콘 에러 방지 -->
+             <!-- <link rel="shortcut icon" href="#"> -->
+             <link rel="icon" href="data:;base64,iVBORw0Kgo=">
+             <!-- # 컨트롤러 중복 방지 코드-->
             <title>LAMER</title>
         </head>
         <body>
@@ -61,14 +66,14 @@
                         </div>
                         <div class="login"></div>
                     </div>
-                    <div class="headerBottom">
+                    <div class="headerBotton">
                         <div class="logo"></div>
                         <nav></nav>
                         <div class="cart"></div>
                     </div>
                 </header>
                 <main>
-                    <section>
+                    <section class = "mainSection">
                         <h2 hidden>mainContant</h2>
                         <div class="mainContent_Wrapper">
                             <div class="mainConentLeft_vedio">
@@ -103,10 +108,10 @@
                             </div>
                         </div>
                     </section>
-                    <section>
+                    <section class = "mainSection">
                         <h2 hidden>bestProductList</h2>
                         <div class="bestProductTitle">
-                            <p class="RamerKRFont">데이<span class="RamerENFont">&</span>나이트 리뉴얼<span class="RamerENFont">with</span>라 메르</p>
+                            <p class="RamerFont_KR">데이<span class="RamerFont_EN">&</span>나이트 리뉴얼<span class="RamerFont_EN">with</span>라 메르</p>
                             <p>바다의 강인한 생명력,
                                 <br>미라클 브로스로 완성하는 힐링 에너지를 경험해보세요.
                             </p>
@@ -114,7 +119,14 @@
                         <div class="bestProducts">
                             <ul>
                                 <li>
-                                    <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_4HK301_4x5_0.png?width=900&height=1125" alt="모이스춰라이징 소프트 크림 상품이미지">
+                                    <div class="imageBox">
+                                        <a href="#" class="productImage">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_4HK301_4x5_0.png?width=900&height=1125" alt="모이스춰라이징 소프트 크림 상품이미지">
+                                        </a>
+                                        <a href="#" class="productImage_hover">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_prod_104371_4x5_1.png?width=900&height=1125" alt="상품 텍스쳐 이미지">
+                                        </a>
+                                    </div>
                                     <ul class ="productSize">
                                         <li><a href="#">15ml</a></li>
                                         <li><a href="#">30ml</a></li>
@@ -126,7 +138,14 @@
                                     <a href="#">장바구니 담기</a>
                                 </li>
                                 <li>
-                                    <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_46HL01_4x5_0.png?width=900&height=1125" alt="리쥬비네이팅 나이트 크림 상품이미지">
+                                    <div class="imageBox">
+                                        <a href="#" class="productImage">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_46HL01_4x5_0.png?width=900&height=1125" alt="리쥬비네이팅 나이트 크림 상품이미지">
+                                        </a>
+                                        <a href="#" class="productImage_hover">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_prod_130879_4x5_1.png?width=900&height=1125" alt="상품 텍스쳐 이미지">
+                                        </a>
+                                    </div>
                                     <ul class ="productSize">
                                         <li><a href="#">15ml</a></li>
                                         <li><a href="#">30ml</a></li>
@@ -138,7 +157,14 @@
                                     <a href="#">장바구니 담기</a>
                                 </li>
                                 <li>
-                                    <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_5E8L01_4x5_0.png?width=900&height=1125" alt="크렘 드 라 메르 상품이미지">
+                                    <div class="imageBox">
+                                        <a href="#" class="productImage">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_5E8L01_4x5_0.png?width=900&height=1125" alt="크렘 드 라 메르 상품이미지">
+                                        </a>
+                                        <a href="#" class="productImage_hover">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_prod_12343_4x5_1.png?width=900&height=1125" alt="상품 텍스쳐 이미지">
+                                        </a>
+                                    </div>
                                     <ul class ="productSize">
                                         <li><a href="#">15ml</a></li>
                                         <li><a href="#">30ml</a></li>
@@ -154,13 +180,13 @@
                             </ul>
                         </div>
                     </section>
-                    <section>
+                    <section class = "mainSection">
                         <h2 hidden>productIntroList</h2>
                     </section>
-                    <section>
+                    <section class = "mainSection">
                         <h2 hidden>promotionPage</h2>
                     </section>
-                    <section>
+                    <section class = "mainSection">
                         <h2 hidden>serviceGuide</h2>
                     </section>
                     <aside>

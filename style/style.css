@@ -12,8 +12,27 @@ a{text-decoration: none;}
     font-style: normal;
 }
 
+.wrapper{
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+header{
+    width: 100%;
+}
+.mainSection{
+    width: 100%;  
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
 
+    border : 1px solid tomato;
+}
 
+/* 헤더 부분 */
 header .headerTop{
     width: 100%;
     height: 50px;
@@ -34,7 +53,6 @@ header .headerTop{
 }
 .promotionlistBtn ul{
     display:flex;
-    /* justify-content: center; */
     align-items: center;
 }
 .promotionlistBtn li{
@@ -50,8 +68,7 @@ header .headerTop{
 .promotionlistBtn ul li:nth-child(2){
     transform: rotate(45deg);
 }
-
-header .headerBottom{
+.headerBotton{
     height: 80px;
     border: 1px solid tomato;
 }
@@ -65,14 +82,11 @@ header .headerBottom{
     display: flex;
     flex-direction: column
 }
-
 .title{
     margin:100px 0 100px 0;
     font-family: "Cormorant Garamond", serif;
-    /* font-optical-sizing: auto; */
     font-weight: 700;
     letter-spacing: -3px;
-    /* font-style:normal; */
     line-height: 90%;
     font-size: 75px;
 }
@@ -99,10 +113,49 @@ header .headerBottom{
     /* width: 613px; */
     /* height: 116px; */
 }
-main section{
-    height: 900px;
-    border : 1px solid tomato;
+
+/* 두번째 페이지 데이앤나이트리뉴얼 */
+.RamerFont_KR{
+    font-family: 'S-CoreDream-3Light', serif;
+    font-weight:700;
+    font-size: 55px;
 }
+.RamerFont_EN{
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+}
+.imageBox{
+    position: relative;
+    background: #F3F4F6;
+    width: 421px;
+    height: 524px;
+}
+.imageBox img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.productImage_hover{
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+.imageBox:hover .productImage_hover{
+    opacity: 1;
+}
+.bestProducts{
+    height: 630px;
+}
+.bestProducts ul{
+    display: flex;
+    justify-content: space-around;
+}
+.bestProducts ul li{
+    width: 421px;
+    display: flex;
+    flex-direction: column;
+}
+
+
 main aside{
     height: 800px;
     border : 1px solid tomato;
@@ -111,3 +164,4 @@ footer{
     height:80px;
     border: 1px solid tomato;
 }
+
