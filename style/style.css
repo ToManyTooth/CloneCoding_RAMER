@@ -1,4 +1,4 @@
-*{margin: 0;padding: 0; font: inherit; color: inherit;}
+*{margin: 0;padding: 0; font: inherit; color: inherit; list-style: none;}
 * , :after, ::before{box-sizing: border-box;}
 html, body{height: 100%;}
 img, picture, video, canvas, svg{display: block; max-width: 100%;}
@@ -17,18 +17,17 @@ a{text-decoration: none;}
     max-width: 1440px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 header{
     width: 100%;
 }
 .mainSection{
-    width: 100%;  
+    width: 100%;
     max-width: 1440px;
     min-height: 100vh;
     margin: 0 auto;
-
+    margin-bottom: 80px;/* 한섹션간의 간격 100px */
     border : 1px solid tomato;
 }
 
@@ -74,7 +73,7 @@ header .headerTop{
 }
 
 /* 첫페이지 메인 */
-.mainContent_Wrapper{
+.mainContent_wrapper{
     display: flex;
     justify-content: center;
 }
@@ -110,8 +109,6 @@ header .headerTop{
 }
 .bigLogo{
     flex-grow: 0;
-    /* width: 613px; */
-    /* height: 116px; */
 }
 
 /* 두번째 페이지 데이앤나이트리뉴얼 */
@@ -123,6 +120,12 @@ header .headerTop{
 .RamerFont_EN{
     font-family: 'Playfair Display', serif;
     font-style: normal;
+}
+.bestProductTitle_wrapper p:nth-child(1){
+    margin: 0 0 40px 0;
+}
+.bestProductTitle_wrapper p:nth-child(2){
+    margin-bottom: 50px;
 }
 .imageBox{
     position: relative;
@@ -142,18 +145,57 @@ header .headerTop{
 .imageBox:hover .productImage_hover{
     opacity: 1;
 }
-.bestProducts{
+
+.bestProducts_wrapper{
     height: 630px;
 }
-.bestProducts ul{
+.bestProducts_wrapper > ul{
     display: flex;
-    justify-content: space-around;
+    justify-content:space-around;
 }
-.bestProducts ul li{
-    width: 421px;
+.bestProducts_wrapper > ul > li{
     display: flex;
     flex-direction: column;
+    width: 421px;
 }
+/* 제품용량박스 */
+.productSizeBox{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+}
+.productSizeBox li{
+    display: block;
+    padding: 10px 0 10px 0;
+}
+.productSizeBox a{
+    display: block;
+    width: 70px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    border: 0.5px solid #555;
+}
+/* 세번째 페이지 대표제품 및 베스트셀러 바로가기 링크 */
+.productIntro_wrapper > ul{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.productIntro_wrapper a{
+    display: block;
+    width: 720px;
+    height: 900px;
+}
+.productIntro_wrapper > ul li:nth-child(1) a{
+    background-image: url(https://www.lamerkorea.com/media/export/cms/homepage/2025/MAR25/LM_0203_main_05.jpg);
+}
+.productIntro_wrapper > ul li:nth-child(2) a{
+    background-image: url(https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_02.jpg);
+}
+/* 네번째페이지 대표제품 슬라이더 */
 
 
 main aside{
