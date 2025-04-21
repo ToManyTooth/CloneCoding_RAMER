@@ -4,14 +4,38 @@ html, body{height: 100%;}
 img, picture, video, canvas, svg{display: block; max-width: 100%;}
 a{text-decoration: none;}
 /* 웹폰트 */
-/* 라메르 한글 */
 @font-face {
-    font-family: 'S-CoreDream-3Light';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-    font-weight: normal;
+    font-family: "LaMerText-Regular";
+    font-display: swap;
     font-style: normal;
+    src: url(/fonts/LaMerText-Regular.woff2) format("woff2");
+}
+@font-face {
+    font-family: "NeueHaasUnicaPro-Regular";
+    font-display: swap;
+    font-style: normal;
+    src: url(/fonts/NeueHaasUnicaPro-Regular.woff2) format("woff2");
+}
+@font-face {
+    font-family: "La Mer Headline KR";
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/LaMerHeadline-Black.woff2) format("woff2");
+}
+@font-face {
+    font-family: "La Mer Headline KR";
+    font-display: swap;
+    font-style: italic;
+    font-weight: 400;
+    src: url(/fonts/LaMerHeadline-BlackItalic.woff2) format("woff2");
 }
 
+
+
+.body{
+    font-family: "La Mer Headline KR", sans-serif;
+}
 .wrapper{
     width: 100%;
     max-width: 1440px;
@@ -29,6 +53,25 @@ header{
     margin: 0 auto;
     margin-bottom: 80px;/* 한섹션간의 간격 100px */
     border : 1px solid tomato;
+}
+/* 보이지않되, 스크린리더에 읽히는 고전적인 숨김방법 */
+.visuallyHidden{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+/* 섹션별 타이틀 기본스타일 */
+.sectionTitle{
+    margin:100px 0 100px 0;
+    font-family: "La Mer Headline KR" , sans-serif, serif;
+    letter-spacing: -3px;
+    font-size: 60px;
+    line-height: 90%;
 }
 
 /* 헤더 부분 */
@@ -81,12 +124,8 @@ header .headerTop{
     display: flex;
     flex-direction: column
 }
-.title{
-    margin:100px 0 100px 0;
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 700;
-    letter-spacing: -3px;
-    line-height: 90%;
+
+.mainContentRight_description > h3{
     font-size: 75px;
 }
 .introduction{
@@ -112,19 +151,14 @@ header .headerTop{
 }
 
 /* 두번째 페이지 데이앤나이트리뉴얼 */
-.RamerFont_KR{
-    font-family: 'S-CoreDream-3Light', serif;
-    font-weight:700;
-    font-size: 55px;
+.bestProductTitle_wrapper > h3{
+    font-weight:400;
+    letter-spacing: 0.2px;
 }
-.RamerFont_EN{
-    font-family: 'Playfair Display', serif;
-    font-style: normal;
+.bestProductTitle_wrapper > h3 em{
+    font-style: italic;
 }
-.bestProductTitle_wrapper p:nth-child(1){
-    margin: 0 0 40px 0;
-}
-.bestProductTitle_wrapper p:nth-child(2){
+.bestProductTitle_wrapper p{
     margin-bottom: 50px;
 }
 .imageBox{
@@ -196,7 +230,15 @@ header .headerTop{
     background-image: url(https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_02.jpg);
 }
 /* 네번째페이지 대표제품 슬라이더 */
-
+.productSlide_wrapper > ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productDescription{
+    display: flex;
+    flex-direction: column;
+}
 
 main aside{
     height: 800px;
@@ -206,4 +248,3 @@ footer{
     height:80px;
     border: 1px solid tomato;
 }
-
