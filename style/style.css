@@ -67,11 +67,37 @@ header{
 }
 /* 섹션별 타이틀 기본스타일 */
 .sectionTitle{
-    margin:100px 0 100px 0;
+    margin:100px 0 10px 0;
     font-family: "La Mer Headline KR" , sans-serif, serif;
     letter-spacing: -3px;
-    font-size: 60px;
+    font-size: 52px;
     line-height: 90%;
+}
+/* 자세히알아보기 링크 */
+.readMoreLink{
+    display: block;
+    padding-bottom: 20px;
+    font-size: 10px;
+    color:#444;
+    text-decoration: underline;
+    margin: 30px 0;
+    letter-spacing: 0.7px;
+}
+
+/* 지금쇼핑하기 링크 및 위치잡기 */
+.productDescBottom{
+    position: relative;
+}
+.shopNowLink{
+    position: absolute;
+    padding-bottom: 20px;
+    font-size: 15px;
+    color:#444;
+    text-decoration: underline;
+    margin: 30px 0;
+    letter-spacing: 0.7px;
+    bottom: 0;
+    left: 70%;
 }
 
 /* 헤더 부분 */
@@ -126,6 +152,7 @@ header .headerTop{
 }
 
 .mainContentRight_description > h3{
+    margin:100px 0 100px 0;
     font-size: 75px;
 }
 .introduction{
@@ -139,7 +166,7 @@ header .headerTop{
     font-size: 13px;
     color:#666;
 }
-.quickLink a{
+.readMoreLink{
     display: block;
     padding-bottom: 20px;
     font-size: 15px;
@@ -152,6 +179,8 @@ header .headerTop{
 
 /* 두번째 페이지 데이앤나이트리뉴얼 */
 .bestProductTitle_wrapper > h3{
+    margin:100px 0 20px 0;
+    font-size: 60px;
     font-weight:400;
     letter-spacing: 0.2px;
 }
@@ -213,6 +242,12 @@ header .headerTop{
     border: 0.5px solid #555;
 }
 /* 세번째 페이지 대표제품 및 베스트셀러 바로가기 링크 */
+.productDescription> div > h3{
+    font-size: 52px;
+    font-weight:500;
+    letter-spacing: 0.2px;
+    line-height: 140%;
+}
 .productIntro_wrapper > ul{
     display: flex;
     justify-content: center;
@@ -230,14 +265,37 @@ header .headerTop{
     background-image: url(https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_02.jpg);
 }
 /* 네번째페이지 대표제품 슬라이더 */
+.productSlide_wrapper ul{
+    display: flex;
+}
 .productSlide_wrapper > ul li{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    min-width: 100%;
 }
 .productDescription{
     display: flex;
     flex-direction: column;
+}
+.productDescTop > .sectionTitle{
+    margin-top: 0;
+}
+.productDescription .productDescTop >p{
+    font-size: 15px;
+    line-height: 160%;
+    color:#666;
+}
+.bigsizeImage img{
+    width: 720px;
+    height: 900px;
+}
+
+/* 다섯번째페이지 프로모션 */
+.promotionPage_wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 main aside{
