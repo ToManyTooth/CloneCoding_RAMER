@@ -3,6 +3,7 @@
 html, body{height: 100%;}
 img, picture, video, canvas, svg{display: block; max-width: 100%;}
 a{text-decoration: none;}
+strong{font-weight: bold;}
 /* 웹폰트 */
 @font-face {
     font-family: "LaMerText-Regular";
@@ -77,13 +78,12 @@ header{
 .readMoreLink{
     display: block;
     padding-bottom: 20px;
-    font-size: 10px;
-    color:#444;
+    font-size: 13px;
+    color:#333;
     text-decoration: underline;
     margin: 30px 0;
     letter-spacing: 0.7px;
 }
-
 /* 지금쇼핑하기 링크 및 위치잡기 */
 .productDescBottom{
     position: relative;
@@ -165,13 +165,6 @@ header .headerTop{
     font-style:italic;
     font-size: 13px;
     color:#666;
-}
-.readMoreLink{
-    display: block;
-    padding-bottom: 20px;
-    font-size: 15px;
-    color:#444;
-    text-decoration: underline;
 }
 .bigLogo{
     flex-grow: 0;
@@ -298,11 +291,101 @@ header .headerTop{
     align-items: center;
 }
 
+/* 여섯번째 페이지 서비스목록 */
+.serviceGuide_wrapper .serviceGuideImage{
+    width:100%;
+    margin: 20px 0;
+}
+.serviceGuide_wrapper > ul{
+    display: flex;
+    justify-content: space-between;
+}
+.serviceGuide_wrapper > ul >li{
+    width: 25%;
+    margin-right:10px;
+}
+.serviceGuide_wrapper p{
+    font-size: 15px;
+}
+.serviceGuide_wrapper .serviceHeading{
+    font-weight: 400;
+}.serviceGuide_wrapper .serviceDescription{
+    color:#666;
+}
+.serviceGuide_wrapper .readMoreLink{
+    margin-top: 5px;
+}
+
+/* footer top */
+footer{
+    border: 1px solid tomato;
+}
+.newsletterDescription{
+    font-size: 15px;
+}
+.agreementDetails{
+    font-size: 13px;
+}
+.footerTop{
+    display: flex;
+    justify-content: space-between;
+}
+.footerTop .sectionTitle{
+    margin-bottom: 70px;
+}
+.footerTop .infoMenu{
+    display: flex;
+    justify-content: space-between;
+    gap: 120px;
+    margin: 100px 200px 0 200px;
+}
+.infoHeading{
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.infoLink{
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 10px;
+}
 main aside{
-    height: 800px;
     border : 1px solid tomato;
 }
-footer{
-    height:80px;
-    border: 1px solid tomato;
+
+
+/* footer bottom */
+.footerBottom{
+    display: flex;
+    margin-bottom: 50px;
+}
+.footerBottom>li{
+    margin-right: 30px;
+}
+.footerBottom>li:first-child{
+    margin-right: 500px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 250%;
+    color: #666;
+}
+.footerBottom>li:last-child{
+    margin-right: 0;
+}
+.footerBottom li a{
+    font-size: 13px;
+    text-align: center;
+    line-height: 250%;
+    color: #666;
+}
+.footerMenuCS{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.footerMenuCS img{
+    width: 50px;
+    height: 20px;
+    vertical-align: middle;
 }
