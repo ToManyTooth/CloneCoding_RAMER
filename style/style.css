@@ -32,20 +32,22 @@ strong{font-weight: bold;}
     src: url(/fonts/LaMerHeadline-BlackItalic.woff2) format("woff2");
 }
 
-
-
 .body{
+    width: 100%;
     font-family: "La Mer Headline KR", sans-serif;
 }
 .wrapper{
     width: 100%;
-    max-width: 1440px;
+    /* max-width: 1440px; */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 header{
     width: 100%;
+    background: #fff;
+    position: relative;
+    z-index: 4;
 }
 .mainSection{
     width: 100%;
@@ -99,13 +101,33 @@ header{
     bottom: 0;
     left: 70%;
 }
+/* input 커스터마이징? */
+input[type="email"],[type="tel"]{
+    border: none;
+    border-bottom: 1px solid #aaa;
+    width: 310px;
+    padding-bottom: 10px;
+    margin:30px 0;
+    font-size: 15px;
+}
+input[type="search"]{
+    border: none;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 950px;
+    padding: 15px;
+    margin-top: -10px;
+    font-size: 20px;
+}
 
 /* 헤더 부분 */
-header .headerTop{
+.headerTop{
     width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
     height: 50px;
     border: 1px solid tomato;
-    position: relative;
+    /* position: relative; */
 }
 .promotionlist > ul{
     display: flex;
@@ -118,6 +140,10 @@ header .headerTop{
     font-size: 12px;
     position: absolute;
     top: 30%;
+}
+.promotionlist li img{
+    width: 32px;
+    height: 32px;
 }
 .promotionlistBtn ul{
     display:flex;
@@ -136,10 +162,154 @@ header .headerTop{
 .promotionlistBtn ul li:nth-child(2){
     transform: rotate(45deg);
 }
-.headerBotton{
+/* 네비 */
+.headerBottom{
+    width: 100vw;
+    max-width: 1440px;
     height: 80px;
+    display: flex;
+    align-items: center;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 4;
+    padding-left: 40px;
     border: 1px solid tomato;
+    
+    background: #fff;
 }
+.headerGnavMainMenu{
+    display: flex;
+    /* gap: 40px; */
+}
+.headerGnavMainItem{
+    font-size: 14px;
+    color: #666;
+    padding: 30px 20px;
+}
+/* 장바구니 부분 */
+.headerGnavMainItem:last-child{
+    margin-left: 800px;
+}
+.localNavWrapper{
+    display: flex;
+    padding: 60px 40px 130px 40px;
+}
+.subMenu{
+    flex-shrink: 0;
+    margin-right: 260px;
+}
+.subMenu a{
+    font-size: 28px;    
+    line-height: 180%;
+    color: #333;
+}
+.brandStoryMenu{
+    padding-right: 700px;/*라메르 스토리만 여백줌*/
+} 
+.asideMenu{
+    display: flex;
+    gap: 100px; /* 각 카테고리 간 간격 */
+}
+.asideMenu li{
+    flex-shrink: 0;
+}
+.asideMenu a{
+    color: #666;
+    font-size: 15px;
+    line-height: 200%;
+}
+.asideMenuItem > a{
+    font-size: 28px;
+    line-height: 150%;
+    color: #333;
+}
+.gnavLogo{
+    width: 100px;
+    margin-right: 40px;
+}
+
+/* 검색 네비게이션 */
+.searchMenuWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    height: 100vh;
+    padding-top: 10px;
+    z-index: 2;
+    background: #fff;
+}
+.recommendedMenu{
+    display: flex;
+    gap: 50px;/*카테고리 간격*/
+    margin-top: 50px;
+}
+.recommendedMenu img{
+    display: block;
+    width: 60px;
+    height: 60px;
+}
+.recommendedMenu a{
+    font-size: 20px;
+    color: #222;
+    display: block;
+    line-height: 100%;
+    align-self: center;
+}
+.recommendedMainItem p{
+    margin-bottom: 10px;
+}
+.recommendedSubMenu li{
+    display: flex;
+    min-width: 280px;
+    max-width: 280px;
+    background: #fcfafa;
+    border-bottom: 2px solid #fff;
+}
+.recommendedSubMenu > li:last-child{
+    margin-right: 0;
+}
+/* 네비 콘텐츠 컨트롤 */
+.headerGnavContents{
+    visibility:hidden;
+}
+.headerGnavContents{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    background: #fff;
+}
+/* 네비 오버레이 */
+.gnavOverlay{
+    position: fixed;
+    top:130px;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    visibility: hidden;
+}
+/* header .gnavOverlay::before{
+    content: '';
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    visibility: hidden;
+} */
 
 /* 첫페이지 메인 */
 .mainContent_wrapper{
@@ -260,6 +430,7 @@ header .headerTop{
 /* 네번째페이지 대표제품 슬라이더 */
 .productSlide_wrapper ul{
     display: flex;
+    overflow: hidden;
 }
 .productSlide_wrapper > ul li{
     display: flex;
@@ -320,24 +491,52 @@ header .headerTop{
 footer{
     border: 1px solid tomato;
 }
-.newsletterDescription{
-    font-size: 15px;
-}
-.agreementDetails{
-    font-size: 13px;
-}
 .footerTop{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 60px;
+}
+.footerTop .newsletter{
+    flex: 1;
+    max-width: 310px;
 }
 .footerTop .sectionTitle{
     margin-bottom: 70px;
 }
+.newsletterDescription{
+    font-size: 15px;
+    letter-spacing: -0.03rem;
+}
+/* radio 버튼 컬러변경 */
+[type="radio"]{
+    accent-color: black;
+}
+.newsletterButton span{
+    font-size: 15px;
+}
+.privacyButton span{
+    font-size: 13px;
+}
+.agreementDetails{
+    font-size: 13px;
+    letter-spacing: -0.03em;
+}
+.signUpButton{
+    display: block;
+    background: #000;
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 3.5em;
+}
 .footerTop .infoMenu{
     display: flex;
-    justify-content: space-between;
-    gap: 120px;
-    margin: 100px 200px 0 200px;
+    flex: 1;
+    gap: 100px;
+    justify-content: flex-end;
+    margin: 100px 200px 0 350px;
 }
 .infoHeading{
     font-size: 15px;
@@ -348,6 +547,7 @@ footer{
     font-size: 15px;
     color: #666;
     margin-bottom: 10px;
+    line-height: 2.0em;
 }
 main aside{
     border : 1px solid tomato;
