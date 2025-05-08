@@ -43,20 +43,6 @@ strong{font-weight: bold;}
     display: flex;
     flex-direction: column;
 }
-header{
-    width: 100%;
-    background: #fff;
-    position: relative;
-    z-index: 4;
-}
-.mainSection{
-    width: 100%;
-    max-width: 1440px;
-    min-height: 100vh;
-    margin: 0 auto;
-    margin-bottom: 80px;/* 한섹션간의 간격 100px */
-    border : 1px solid tomato;
-}
 /* 보이지않되, 스크린리더에 읽히는 고전적인 숨김방법 */
 .visuallyHidden{
     position: absolute;
@@ -101,7 +87,7 @@ header{
     bottom: 0;
     left: 70%;
 }
-/* input 커스터마이징? */
+/* input 커스터마이징 */
 input[type="email"],[type="tel"]{
     border: none;
     border-bottom: 1px solid #aaa;
@@ -119,69 +105,129 @@ input[type="search"]{
     margin-top: -10px;
     font-size: 20px;
 }
+/* radio 버튼 컬러변경 */
+[type="radio"]{
+    accent-color: black;
+}
 
-/* 헤더 부분 */
+/* Header */
+header{
+    width: 100%;
+    background: #fff;
+    position: relative;
+    z-index: 4;
+}
+/* 헤더탑(프로모션슬라이더) */
 .headerTop{
+    display: flex;
+    justify-content: center;
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
     height: 50px;
     border: 1px solid tomato;
-    /* position: relative; */
 }
-.promotionlist > ul{
+.promotionWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    flex-grow: 1;
+}
+.promotionList{
     display: flex;
     justify-content: center;
-    list-style: none;
-    /* gap: 1rem; */
+    align-items: center;
 }
-.promotionlist li{
+.promotionList li{
     display: flex;
+    align-items: center;
     font-size: 12px;
     position: absolute;
-    top: 30%;
+    top: 7px;
+    opacity: 0;
 }
-.promotionlist li img{
+.promotionList li:first-child{
+    top: 13px;
+}
+.promotionList li > a{
+    display: block;
+    margin-left: 10px;
+    text-decoration: underline;
+    font-size: 14px;
+    font-weight: 400;
+}
+.promotionList li > p{
+    color: #333;
+    font-size: 12px;
+}
+.promotionList li img{
     width: 32px;
     height: 32px;
 }
-.promotionlistBtn ul{
-    display:flex;
-    align-items: center;
+.login{
+    align-self: center;
+    margin-right: 20px;
 }
-.promotionlistBtn li{
-    content: '';
-    width: 20px;
-    height: 20px;
-    border-top: 5px solid #000;
-    border-right: 5px solid #000;
+.promotionlistBtn a{
+    display: block;
+    content:' ';
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
 }
-.promotionlistBtn ul li:nth-child(1){
+.promotionlistBtn .headerTopPrevBtn{
     transform: rotate(225deg);
 }
-.promotionlistBtn ul li:nth-child(2){
+.promotionlistBtn .headerTopNextBtn{
     transform: rotate(45deg);
 }
-/* 네비 */
+
+/* 헤더바텀(네비) */
 .headerBottom{
     width: 100vw;
     max-width: 1440px;
     height: 80px;
     display: flex;
     align-items: center;
-    /* position: absolute; */
-    top: 0;
-    left: 0;
     margin: 0 auto;
-    z-index: 4;
     padding-left: 40px;
     border: 1px solid tomato;
-    
     background: #fff;
 }
+/* X클로즈버튼 */
+.closeButton{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+.closeButton:before, .closeButton:after {
+    content: '';
+    width: 1px;
+    height: 20px;
+    position: absolute;
+    top: 20px;
+    right: 280px;
+    z-index: 3;
+    background-color: #888;
+}
+.closeButton::before{
+    transform: rotate(45deg);
+}
+.closeButton::after{
+    transform: rotate(-45deg);
+}
+.searchCloseButton:before, .searchCloseButton:after{
+    top: 40px;
+    right: 500px;
+}
+.closeButton{
+
+}
+
 .headerGnavMainMenu{
     display: flex;
-    /* gap: 40px; */
 }
 .headerGnavMainItem{
     font-size: 14px;
@@ -299,17 +345,16 @@ input[type="search"]{
     background-color: rgba(0,0,0,0.3);
     visibility: hidden;
 }
-/* header .gnavOverlay::before{
-    content: '';
-    position: fixed;
-    top:0;
-    left: 0;
-    z-index: 1;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.3);
-    visibility: hidden;
-} */
+
+/* MainContents */
+.mainSection{
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    margin-bottom: 80px;/* 한섹션간의 간격 100px */
+    border : 1px solid tomato;
+}
 
 /* 첫페이지 메인 */
 .mainContent_wrapper{
@@ -486,10 +531,10 @@ input[type="search"]{
 .serviceGuide_wrapper .readMoreLink{
     margin-top: 5px;
 }
-
-/* footer top */
-footer{
-    border: 1px solid tomato;
+/* 푸터 */
+.footer_wrapper{
+    margin: 0 auto;
+    max-width: 1440px;
 }
 .footerTop{
     display: flex;
@@ -506,10 +551,6 @@ footer{
 .newsletterDescription{
     font-size: 15px;
     letter-spacing: -0.03rem;
-}
-/* radio 버튼 컬러변경 */
-[type="radio"]{
-    accent-color: black;
 }
 .newsletterButton span{
     font-size: 15px;

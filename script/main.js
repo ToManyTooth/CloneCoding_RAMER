@@ -1,7 +1,76 @@
+// 프로모션 슬라이더
+(function(){
+    let promotionList = $('.promotionList > li');
+    let promotionPrevBtn = $('.headerTopPrevBtn');
+    let promotionNextBtn = $('.headerTopNextBtn');
+    let promotionListLength = promotionList.length;
+    let autoSlider = null;
+    let currentIdx = 0;
 
+    //5초 자동 슬라이더
+    promotionList.eq(0).css({opacity:1});//첫 프로모션 목록 보이기
+    function sliderTimer(){
+        autoSlider = setTimeout(function(){
+            promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
+            if(currentIdx == (promotionListLength-1)){
+                currentIdx = 0;
+            }else{
+                    currentIdx++;
+                }
+                promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
+            sliderTimer();
+        },5000);
+    };
+
+    sliderTimer();
+    
+    //왼쪽버튼
+    promotionPrevBtn.on('click',function(a){
+        a.preventDefault();
+        let tempThis = $(this);
+        clearTimeout(autoSlider);
+        tempThis.css('pointer-events','none');
+        promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
+        if(currentIdx>0){
+            currentIdx--;
+        }else{
+            currentIdx = promotionListLength-1;
+        }
+        promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
+        
+        //5초 후 다시 자동슬라이더 시작, 1.5초후 버튼 클릭가능
+        setTimeout(sliderTimer,5000);
+        setTimeout(function(){
+            tempThis.css('pointer-events','auto');
+        },1500);
+    });
+
+    //오른쪽버튼
+    promotionNextBtn.on('click',function(a){
+        a.preventDefault();
+        let tempThis = $(this);
+        tempThis.css('pointer-events','none');
+        promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
+        if(currentIdx==promotionListLength-1){
+            currentIdx = 0;
+        }else{
+            currentIdx++;
+        }
+        promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
+        
+        //5초 후 다시 자동슬라이더 시작, 1.5초후 버튼 클릭가능
+        setTimeout(sliderTimer,5000);
+        setTimeout(function(){
+            tempThis.css('pointer-events','auto');
+        },1500);
+    });
+})();
+
+// 네비게이션
 let mainMenu = $('.headerGnavMainItem');
 let prevSubMenu = $('.headerGnavContents');
 let overlay = $('.gnavOverlay');
+let closeBtn = $('.closeButton');
 
 mainMenu.hover(function(){
     if($(this).is('.headerGnavMainItemCart')==true){
@@ -12,14 +81,17 @@ mainMenu.hover(function(){
         let currentSubMenu = $(this).find('.headerGnavContents');
         currentSubMenu.css('visibility','visible');
         overlay.css('visibility','visible');
-        console.log("호버시작");
     }
 },function(){
     overlay.mouseover(function(){
         prevSubMenu.css('visibility','hidden');
         overlay.css('visibility','hidden');
-        console.log("호버끝");
     });
+});
+closeBtn.on('click',function(){
+    prevSubMenu.css('visibility','hidden');
+    overlay.css('visibility','hidden');
+    console.log("눌렀당");
 });
 
 
