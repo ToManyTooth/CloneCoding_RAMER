@@ -12,11 +12,31 @@
             <title>LAMER</title>
         </head>
         <body>
+            <svg style="display:none;">
+                <symbol id="search-large" viewBox="0 0 503 500">
+                    <title>search-large icon</title><path d="M502.816 477.57L387.734 362.758a219.37 219.37 0 0052.489-142.543C440.223 98.789 341.539 0 220.215 0 98.89 0 .184 98.79.184 220.215c0 121.422 98.707 220.187 220.03 220.187 53.544.036 105.259-19.574 145.349-55.09L480.483 500zm-282.601-68.804c-103.883 0-188.399-84.586-188.399-188.551 0-103.969 84.516-188.555 188.399-188.555 103.879 0 188.398 84.586 188.398 188.555 0 103.965-84.52 188.55-188.398 188.55zm0 0"></path>
+                </symbol>
+                <symbol id="bag-straight" viewBox="0 0 370 500">
+                    <title>bag-straight icon</title><path d="M370 101.344h-28.672v.379H28.672v-.38H0v398.622h370zm-28.684 29v341.039H28.672v-341.04zm-68.371-41.563h-28.683c.61-32.676-25.426-59.652-58.16-60.258-32.73-.605-59.754 25.383-60.364 58.055-.011.73-.011 1.473 0 2.203H97.066C96.54 40.305 135.488.582 184.051.035c48.566-.523 88.367 38.356 88.894 86.832zm0 0"></path>
+                </symbol>
+                <symbol id="tripple-hamburger" viewBox="0 0 652 500">
+                    <title>tripple-hamburger icon</title><path d="M.078 0h651.844v41.754H.078zm0 229.129h651.844v41.758H.078zm0 229.117h651.844V500H.078zm0 0"></path>
+                </symbol>
+                <symbol id="plus-med--large" viewBox="0 0 500 500">
+                    <title>plus-med--large icon</title><path d="M500 233.523H266.008V0h-32.016v233.523H0v31.954h233.992V500h32.016V265.477H500zm0 0"></path>
+                </symbol>
+                <symbol id="minus" viewBox="0 0 606 500">
+                    <title>minus icon</title><path d="M0 237.1h606V283H0v-45.9z"></path>
+                </symbol>
+                <symbol id="close-thin" viewBox="0 0 509 500">
+                    <title>close-thin icon</title><path d="M508.555 22.75L486.215 0 254.5 227.66 22.773 0 .445 22.75l231.313 227.246L.445 477.25 22.773 500 254.5 272.34 486.215 500l22.34-22.75-231.313-227.254zm0 0"></path>
+                </symbol>
+            </svg>
             <div class="wrapper">
                 <header>
                     <div class="headerTop">
                         <div class="promotionWrapper">
-                            <div class="promotionlistBtn"><a href="javascript:void(0)" class="headerTopPrevBtn"></a></div>
+                            <div class="arrowBtn"><a href="javascript:void(0)" class="headerTopPrevBtn"></a></div>
                             <ul class="promotionList">
                                 <li><a href="javascript:void(0)">전 구매 무료 배송 & 선물 포장 서비스 제공</a></li>
                                 <li>
@@ -55,7 +75,7 @@
                                     <a href="javascript:void(0)">쇼핑하기</a>
                                 </li>
                             </ul>
-                            <div class="promotionlistBtn"><a href="#" class="headerTopNextBtn"></a></div>
+                            <div class="arrowBtn"><a href="#" class="headerTopNextBtn"></a></div>
                         </div>
                         <div class="login"><a href="javascript:void(0)">로그인</a></div>
                     </div>       
@@ -65,11 +85,11 @@
                         </div>
                         <nav class="headerGnav">
                             <ul class="headerGnavMainMenu">
-                                <li class="headerGnavMainItem"><a href="javascript:void(0)">쇼핑</a>
+                                <li class="headerGnavMainItem PCVersionGnavHover"><a href="javascript:void(0)" class="PCVersionNavMenu">쇼핑</a>
                                     <div class="headerGnavContents">
                                         <div class="localNavWrapper">
                                             <span class="closeButton"></span>
-                                            <ul class="subMenu">
+                                            <ul class="subMenu shopping">
                                                 <li><a href="javascript:void(0)">베스트 셀러</a></li>
                                                 <li><a href="javascript:void(0)">크렘 드 라 메르</a></li>
                                                 <li><a href="javascript:void(0)">리틀 럭셔리</a></li>
@@ -77,7 +97,12 @@
                                                 <li><a href="javascript:void(0)">공식몰 단독 오퍼</a></li>
                                             </ul>
                                             <ul class="asideMenu">
-                                                <li class="asideMenuItem"><a href="javascript:void(0)">스킨케어</a>
+                                                <li class="asideMenuItem">
+                                                    <a href="javascript:void(0)">스킨케어</a>
+                                                    <button class="categoryToggleButton" data-open = "false">
+                                                        <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                                        <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                                    </button>
                                                     <ul>
                                                         <li><a href="javascript:void(0)">세럼</a></li>
                                                         <li><a href="javascript:void(0)">모이스춰라이저</a></li>
@@ -92,7 +117,12 @@
                                                         <li><a href="javascript:void(0)">스킨케어 전체 보기</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="asideMenuItem"><a href="javascript:void(0)">스킨 컬러</a>
+                                                <li class="asideMenuItem">
+                                                    <a href="javascript:void(0)">스킨 컬러</a>
+                                                    <button class="categoryToggleButton" data-open = "false">
+                                                        <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                                        <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                                    </button>
                                                     <ul>
                                                         <li><a href="javascript:void(0)">프라이머</a></li>
                                                         <li><a href="javascript:void(0)">파운데이션</a></li>
@@ -100,14 +130,24 @@
                                                         <li><a href="javascript:void(0)">스킨컬러 전체 보기</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="asideMenuItem"><a href="javascript:void(0)">바디</a>
+                                                <li class="asideMenuItem">
+                                                    <a href="javascript:void(0)">바디</a>
+                                                    <button class="categoryToggleButton" data-open = "false">
+                                                        <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                                        <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                                    </button>
                                                     <ul>
                                                         <li><a href="javascript:void(0)">바디 케어</a></li>
                                                         <li><a href="javascript:void(0)">핸드 케어</a></li>
                                                         <li><a href="javascript:void(0)">바디 전체 보기</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="asideMenuItem"><a href="javascript:void(0)">컬렉션</a>
+                                                <li class="asideMenuItem">
+                                                    <a href="javascript:void(0)">컬렉션</a>
+                                                    <button class="categoryToggleButton" data-open = "false">
+                                                        <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                                        <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                                    </button>
                                                     <ul>
                                                         <li><a href="javascript:void(0)">제네상스 드 라 메르</a></li>
                                                         <li><a href="javascript:void(0)">맨즈 에센셜</a></li>
@@ -122,7 +162,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="headerGnavMainItem"><a href="javascript:void(0)">라 메르 이야기</a>
+                                <li class="headerGnavMainItem PCVersionGnavHover"><a href="javascript:void(0)" class="PCVersionNavMenu">라 메르 이야기</a>
                                     <div class="headerGnavContents">
                                         <div class="localNavWrapper">
                                             <span class="closeButton"></span>
@@ -136,7 +176,13 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="headerGnavMainItem"><a href="javascript:void(0)">검색</a>
+                                <li class="headerGnavMainItem PCVersionGnavHover">
+                                    <a href="javascript:void(0)" class="searchGnavMainItem PCVersionNavMenu">검색
+                                        <svg role="img" class="searchIcon">
+                                            <title>검색</title> 
+                                            <use xlink:href="#search-large"></use>
+                                        </svg>
+                                    </a>
                                     <div class="headerGnavContents">
                                         <div class="searchMenuWrapper">
                                             <span class="closeButton searchCloseButton"></span>
@@ -204,21 +250,56 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="headerGnavMainItem headerGnavMainItemCart"><a href="javascript:void(0)">장바구니 ( 0 )</a>
-                                    <div class="cartPopup">
-                                        <div class="cartPopupWrapper">
-                                            <span class="cartCloseButton"></span>
-                                            <div class="cartText">
-                                                <p>장바구니가 비어있습니다</p>
-                                                <a href="javascript:void(0)">수정</a>
-                                            </div>
-                                            <div class="cartUnderline"></div>
-                                            <button>쇼핑 계속하기</button>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </nav>
+                        <div class="headerGnavMainItem headerGnavMainItemCart PCVersionGnavHover PCVersionNavMenu"><a href="javascript:void(0)">장바구니 ( 0 )</a>
+                            <div class="cartPopup">
+                                <div class="cartPopupWrapper">
+                                    <span class="cartCloseButton"></span>
+                                    <div class="cartText">
+                                        <p>장바구니가 비어있습니다</p>
+                                        <a href="javascript:void(0)">수정</a>
+                                    </div>
+                                    <div class="cartUnderline"></div>
+                                    <button>쇼핑 계속하기</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mobileVersionNavMenu">
+                            <svg role="img" class="movileNavIcon">
+                                    <title>검색</title> 
+                                    <use xlink:href="#search-large"></use> 
+                            </svg>
+                            <div class="headerGnavMainItem headerGnavMainItemCart">
+                                <a href="javascript:void(0)" class="movileHeaderGnavCart"> 
+                                    <svg aria-label="cart" focusable="false" class="movileNavIcon movileNavIconCart">
+                                        <title>Cart</title> 
+                                        <use xlink:href="#bag-straight"></use> 
+                                    </svg>
+                                    <span>( 0 )</span>
+                                </a>
+                                <div class="cartPopup">
+                                    <div class="cartPopupWrapper">
+                                        <span class="cartCloseButton"></span>
+                                        <div class="cartText">
+                                            <p>장바구니가 비어있습니다</p>
+                                            <a href="javascript:void(0)">수정</a>
+                                        </div>
+                                        <div class="cartUnderline"></div>
+                                        <button>쇼핑 계속하기</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="hamburgerToggleButton" data-open = "false">
+                                <svg role="button" class="movileNavIcon hamburgerOnButton">
+                                    <title>Menu</title>
+                                <use xlink:href="#tripple-hamburger"></use> </svg>
+                                <svg role="button" class="movileNavIcon hamburgerOffButton">
+                                    <title>Menu</title> 
+                                <use xlink:href="#close-thin"></use> </svg>
+                            </button>
+                        </div>
+                        <div class="headerGnavContentsBackground"></div>
                     </div>
                     <div class="gnavOverlay"></div>
                 </header>
@@ -267,7 +348,7 @@
                         <div class="bestProducts_wrapper scrollAnimate">
                             <ul>
                                 <li>
-                                    <div class="imageBox">
+                                    <div class="imageBoxProjuctList">
                                         <a href="javascript:void(0)" class="productImage">
                                             <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_4HK301_4x5_0.png?width=900&height=1125" alt="모이스춰라이징 소프트 크림 상품이미지">
                                         </a>
@@ -286,7 +367,7 @@
                                     <a href="javascript:void(0)" class="addtocart_link">장바구니 담기</a>
                                 </li>
                                 <li>
-                                    <div class="imageBox">
+                                    <div class="imageBoxProjuctList">
                                         <a href="javascript:void(0)" class="productImage">
                                             <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_46HL01_4x5_0.png?width=900&height=1125" alt="리쥬비네이팅 나이트 크림 상품이미지">
                                         </a>
@@ -305,25 +386,29 @@
                                     <a href="javascript:void(0)" class="addtocart_link">장바구니 담기</a>
                                 </li>
                                 <li>
-                                    <div class="imageBox">
+                                    <div class="imageBoxProjuctList">
                                         <a href="javascript:void(0)" class="productImage">
-                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_5E8L01_4x5_0.png?width=900&height=1125" alt="크렘 드 라 메르 상품이미지">
+                                            <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_332002_4x5_0.png?width=900&height=1125" alt="크렘 드 라 메르 상품이미지">
                                         </a>
                                         <a href="javascript:void(0)" class="productImage_hover">
                                             <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_prod_12343_4x5_1.png?width=900&height=1125" alt="상품 텍스쳐 이미지">
                                         </a>
                                     </div>
-                                    <ul class ="productSizeBox">
-                                        <li><a href="#">15ml</a></li>
-                                        <li><a href="#">30ml</a></li>
-                                        <li><a href="#">60ml</a></li>
-                                        <li><a href="#">100ml</a></li>
-                                        <li><a href="#">250ml</a></li>
-                                    </ul>
-                                    <a href="#" class="productItemTitle">크렘 드 라 메르</a>
-                                    <a href="#" class="productItemDesc">리치한 질감과 촉촉한 마무리의 오리지널 럭셔리 크림</a>
-                                    <a href="#" class="productItemDesc">&#8361; 165,000</a>
-                                    <a href="#" class="addtocart_link">장바구니 담기</a>
+                                    <div class="productSizeBoxSlide">
+                                        <div class="arrowBtn productSizeBoxSlideBtn"><a href="javascript:void(0)" class="productSizeBoxPrevBtn"></a></div>
+                                        <ul class ="productSizeBox">
+                                            <li><a href="javascript:void(0)">15ml</a></li>
+                                            <li><a href="javascript:void(0)">30ml</a></li>
+                                            <li><a href="javascript:void(0)">60ml</a></li>
+                                            <li><a href="javascript:void(0)">100ml</a></li>
+                                            <li><a href="javascript:void(0)">250ml</a></li>
+                                        </ul>
+                                        <div class="arrowBtn productSizeBoxSlideBtn"><a href="javascript:void(0)" class="productSizeBoxNextBtn"></a></div>
+                                    </div>
+                                    <a href="javascript:void(0)" class="productItemTitle">크렘 드 라 메르</a>
+                                    <a href="javascript:void(0)" class="productItemDesc">리치한 질감과 촉촉한 마무리의 오리지널 럭셔리 크림</a>
+                                    <a href="javascript:void(0)" class="productItemDesc">&#8361; 165,000</a>
+                                    <a href="javascript:void(0)" class="addtocart_link">장바구니 담기</a>
                                 </li>
                             </ul>
                         </div>
@@ -331,10 +416,12 @@
                     <section class = "mainSection">
                         <h2 class="visuallyHidden">productIntro</h2>
                         <div class="productIntro_wrapper scrollAnimate">
-                            <ul>
+                            <a href="javascript:void(0)"><img src="https://www.lamerkorea.com/media/export/cms/homepage/2025/MAR25/LM_0203_main_05.jpg" alt="모이스춰라이저 제품 바로가기"></a>
+                            <a href="javascript:void(0)"><img src="https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_02.jpg" alt="베스트상품 바로가기"></a>
+                            <!-- <ul>
                                 <li><a href="javascript:void(0)" aria-label="모이스춰라이저 제품 바로가기"></a></li>
                                 <li><a href="javascript:void(0)" aria-label="베스트상품 바로가기"></a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </section>
                     <section class = "mainSection">
@@ -560,8 +647,8 @@
                             <li><a href="javascript:void(0)">정품 및 품질 보증</a></li>
                             <li><a href="javascript:void(0)">서비스 이용 약관</a></li>
                             <li><a href="javascript:void(0)" class="footerMenuCS">고객지원 서비스
-                                <img src="https://www.lamerkorea.com/media/export/cms/eA_icon_gray-new1.png" alt="고객지원아이콘">
-                            </a></li>
+                                <img src="https://www.lamerkorea.com/media/export/cms/eA_icon_gray-new1.png" alt="고객지원아이콘"></a>
+                            </li>
                         </ul>
                     </div>
                 </footer>
@@ -569,7 +656,7 @@
             <div class="chatButton">
                 <a href="javascript:void(0)"><img src="https://www.lamerkorea.com/media/export/cms/live_chat_icon_100x100.jpg" alt="상담원연결채팅창"></a>
             </div>
-            
+
             <button class="backToTopButton"></button>
             <script src="/script/main.js"></script>
         </body>    

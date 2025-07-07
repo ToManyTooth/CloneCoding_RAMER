@@ -36,13 +36,15 @@ body{
     height: 100%;
     font-family: "La Mer Headline KR", sans-serif;
     padding-top: 130px;
+
 }
 .wrapper{
     width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    overflow: hidden;
+    height: 100%;    
 }
 /* 보이지않되, 스크린리더에 읽히는 고전적인 숨김방법 */
 .visuallyHidden{
@@ -54,14 +56,6 @@ body{
     overflow: hidden;
     clip: rect(0,0,0,0);
     border: 0;
-}
-/* 섹션별 타이틀 기본스타일 */
-.sectionTitle{
-    margin:100px 0 10px 0;
-    font-family: "La Mer Headline KR" , sans-serif, serif;
-    letter-spacing: -3px;
-    font-size: 52px;
-    line-height: 90%;
 }
 /* 자세히알아보기 링크 */
 .readMoreLink{
@@ -114,6 +108,13 @@ input[type="search"]::-webkit-search-cancel-button{
 [type="radio"]{
     accent-color: black;
 }
+/* 비디오 설정 */
+video{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
 /* 스크롤 애니메이션 */
 .scrollAnimate{
     opacity: 0;
@@ -164,7 +165,6 @@ header{
     max-width: 1440px;
     margin: 0 auto;
     height: 50px;
-    /* border: 1px solid tomato; */
 }
 .promotionWrapper{
     display: flex;
@@ -212,7 +212,7 @@ header{
     color: #666;
     font-size: 12px;
 }
-.promotionlistBtn a{
+.arrowBtn a{
     display: block;
     content:' ';
     width: 12px;
@@ -220,39 +220,51 @@ header{
     border-top: 1px solid #000;
     border-right: 1px solid #000;
 }
-.promotionlistBtn .headerTopPrevBtn{
+.arrowBtn .headerTopPrevBtn{
     transform: rotate(225deg);
 }
-.promotionlistBtn .headerTopNextBtn{
+.arrowBtn .headerTopNextBtn{
     transform: rotate(45deg);
 }
 /* 헤더바텀(네비) */
 .headerBottom{
-    width: 100vw;
+    width: 100%;
     height: 80px;
+    max-width: 1440px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content:flex-start;
+    margin: 0 auto;
     padding-left: 40px;
-    /* border: 1px solid tomato; */
     background: #fff;
-    top: 50px;
-    left: 0;
+}
+.headerGnavMainMenu>li{
+    flex-shrink: 0;
+    border: 3px solid blueviolet;
+}
+.mobileVersionNavMenu{
+    display: none;
 }
 /* X클로즈버튼 */
 .closeButton{
     cursor: pointer;
     width: 20px;
     height: 20px;
+    position: absolute;
+    top: 20px;
+    right: 3%;
+    z-index: 3;
+}
+.searchCloseButton{
+    top: 15px;
+    right: 5px;
 }
 .closeButton:before, .closeButton:after {
     content: '';
+    position: absolute;
+    left: 7px;
     width: 1px;
     height: 20px;
-    position: absolute;
-    top: 20px;
-    right: 280px;
-    z-index: 3;
     background-color: #888;
 }
 .closeButton::before{
@@ -260,10 +272,6 @@ header{
 }
 .closeButton::after{
     transform: rotate(-45deg);
-}
-.searchCloseButton:before, .searchCloseButton:after{
-    top: 37px;
-    right: 520px;
 }
 .headerGnavMainMenu{
     display: flex;
@@ -274,8 +282,8 @@ header{
     padding: 30px 20px;
 }
 /* 장바구니 부분 */
-.headerGnavMainItem:last-child{
-    margin-left: 900px;
+.headerGnavMainItemCart{
+    margin-left: auto;
     position: relative;
 }
 .cartPopup{
@@ -339,30 +347,29 @@ header{
 .cartCloseButton::after{
     transform: rotate(-45deg);
 }
-
-
+/* 메인 네비 안에 메뉴들 */
 .localNavWrapper{
     display: flex;
     padding: 60px 40px 130px 40px;
+    position: relative;
+    width: 1440px;
 }
 .subMenu{
     flex-shrink: 0;
-    margin-right: 260px;
+    margin-right: clamp(10px, calc(10px + (260 - 10) * ((100vw - 768px) / (1440 - 768))) , 260px);
 }
 .subMenu a{
     font-size: 28px;    
     line-height: 180%;
     color: #333;
 }
-.brandStoryMenu{
-    padding-right: 700px;/*라메르 스토리만 여백줌*/
-} 
 .asideMenu{
     display: flex;
-    gap: 100px; /* 각 카테고리 간 간격 */
+    gap: clamp(10px,calc(10px + (100 - 10) * ((100vw - 768px) / (1440 - 768))),100px); 
+    /* 각 카테고리 간 간격 */
 }
 .asideMenu li{
-    flex-shrink: 0;
+    min-width: 120px;
 }
 .asideMenu a{
     color: #666;
@@ -374,17 +381,31 @@ header{
     line-height: 150%;
     color: #333;
 }
+.toggleBtnIcon{
+    display: none;
+}
+.brandStoryMenu{
+    margin-right: 560px;
+    /*라메르 스토리만 여백줌*/
+} 
 .gnavLogo{
     width: 100px;
     margin-right: 40px;
+    flex-shrink: 0;
+
 }
 
 /* 검색 네비게이션 */
+.searchGnavMainItem{
+    display: flex;
+}
 .searchMenuWrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
+    max-width: 950px;
     width: 100%;
     top: 100%;
     left: 0;
@@ -392,6 +413,7 @@ header{
     padding-top: 10px;
     z-index: 2;
     background: #fff;
+    /* border: 1px solid red; */
 }
 .recommendedMenu{
     display: flex;
@@ -423,6 +445,15 @@ header{
 .recommendedSubMenu > li:last-child{
     margin-right: 0;
 }
+.searchIcon{
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-top: 5px;
+    margin-left: 5px;
+    fill: #666;
+}
+
 /* 네비 콘텐츠 컨트롤 */
 .headerGnavContents{
     visibility:hidden;
@@ -434,8 +465,8 @@ header{
     width: 100%;
     top: 100%;
     left: 0;
-    z-index: 2;
     background: #fff;
+    z-index: 2;
 }
 /* 네비 오버레이 */
 .gnavOverlay{
@@ -449,6 +480,382 @@ header{
     visibility: hidden;
 }
 
+/* -----------테블릿형 767px~1023px 헤더 --------------------*/
+
+@media (max-width: 1023px){
+    .headerTop{
+        border: 1px solid rgb(2, 2, 15);
+    }
+    .mobileVersionNavMenu{
+        display: flex;
+        align-items: center;
+        justify-content:flex-start;
+        gap: 12px;
+        height: 25px;
+    }
+    .movileNavIcon{
+        display: block;
+        width: 15px;
+        fill: #444;
+    }
+    /* 헤더바텀(네비) 태블릿 */
+    .headerBottom{
+        width: 100%;
+        height: 80px;
+        max-width: 1440px;
+        display: flex;
+        align-items: center;
+        justify-content:flex-start;
+        margin: 0 auto;
+        padding-left: 40px;
+        background: #fff;
+        /* 수정 */
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    .headerGnav{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: none;
+    }
+    /* 네비 콘텐츠 컨트롤 태블릿 */
+    .headerGnavContents{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        /* 이것저것 해보는중...스크롤만들기 */
+        /* top: 80px; */
+        /* height: calc(100vh - 80px); */
+        /* height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border: 5px solid red; */
+        /* border: 1px solid blue; */
+    }
+    /* 뒷배경 */
+    .headerGnavContentsBackground{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background:#fff;
+        width: 100%;
+        height: 100vh;
+        z-index: -2;
+        display: none;
+    }
+
+    /* 
+    스크롤 만드려는 와중에 
+    headerGnavMainMenu 이게 세로 정렬이 안되있고
+    단순히 위 가로 카테고리 숨기기만한거라 
+    세로 정렬부터 해주자 
+    현상황은 로고에 가려져 있는듯함,
+
+    스크롤 하려다가 여러방법에서 막히고
+    검색 먼저 넣으려고 하니 저 상태라 
+    세로 정렬 후 스크롤 연구하기
+    
+    */
+
+    .headerGnavMainMenu{
+        display: flex;
+    }
+    .headerGnavMainMenu>li{
+        flex-shrink: 0;
+    }
+    .headerGnavMainItem{
+        font-size: 14px;
+        color: #666;
+        padding: 30px 20px;
+
+        /* 추가 */
+        /* display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0; */
+    }
+    .PCVersionGnavHover{
+        /* visibility: hidden; 
+        세로 정렬중 
+        
+        
+        */
+
+        visibility: visible;
+
+
+    }
+    /* X클로즈버튼 태블릿 */
+    .closeButton{
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 20px;
+        right: 3%;
+        z-index: 3;
+    }
+    .searchCloseButton{
+        top: 15px;
+        right: 5px;
+    }
+    .closeButton:before, .closeButton:after {
+        content: '';
+        position: absolute;
+        left: 7px;
+        width: 1px;
+        height: 20px;
+        background-color: #888;
+    }
+    .closeButton::before{
+        transform: rotate(45deg);
+    }
+    .closeButton::after{
+        transform: rotate(-45deg);
+    }
+
+    /* 햄버거 버튼 */
+    .hamburgerToggleButton{
+        cursor: pointer;
+        position: relative;
+        top: 0;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background: none;
+        border: none;
+    }
+    .hamburgerOnButton{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 0;
+    }
+    .hamburgerOffButton{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 0;
+        visibility: hidden;
+    }
+    /* 플러스버튼 */
+    .categoryToggleButton{
+        cursor: pointer;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 7px;
+        right: 3%;
+        background: none;
+        border: none;
+    }
+    .toggleBtnIcon{
+        position: absolute;
+        top: 0;
+        height: 15px;
+    }
+    .minusButton{
+        width: 15px;
+        visibility: hidden;
+    }
+   
+    /* 장바구니 부분 태블릿 */
+    .headerGnavMainItemCart{
+        position: relative;
+        /* left: -1440px; */
+        width: auto;
+        padding: 0;
+    }
+    .movileHeaderGnavCart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        /* height: 20px; */
+    }
+    .movileHeaderGnavCart span{
+        display: block;
+    }
+    .movileNavIconCart{
+        width: 14px;
+        height: 18px;
+        margin: 0 3px 5px 0;
+    }
+    .cartPopup{
+        /* 수정완 */
+        left: -255px;
+    }
+/* 
+모바일 메뉴 킨상태에서 화면 늘리면 이상해짐. 일단 나중에 고치자
+긴화면에서 모바일태블릿으로 줄이고 햄버거 누르면 안보임( 검색 시스템이 가려지는듯함)
+검색 추가하기,
+엑스는 서치메뉴 나올때만 보이고 끄게 하기
+스크롤이 안되는거 고치기,
++스크롤 자세히 보면 해당 영역만 스크롤생김
+상단 슬라이더 위아래 선 추가하기,
+모바일도 똑같이 적용시키기
+
+*/
+
+    /* 메인 네비 안에 메뉴들 태블릿 */
+    .localNavWrapper{
+        display: flex;
+        padding: 60px 40px 130px 40px;
+        position: relative;
+        /* 수정중 */
+        width: 100%;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        height: auto;
+        visibility: visible;
+        /* height: 700px; */
+        /* overflow: auto; */
+    }
+    .subMenu{
+        position: absolute;
+        width: 100%;
+        padding-left: 30px;
+        flex-shrink: 0;
+        /* 추가중 */
+        z-index: 5;
+    }
+
+    .asideMenu{
+        /* 한줄 추가 */
+        flex-direction: column;
+        /* 추가중 */
+        position: absolute;
+        width: 100%;
+        top : 165px;
+        left: 0;
+        padding-left: 30px;
+        gap: 5px;
+        /* 추가중 */
+        z-index: 5;
+    }
+    .asideMenu li{
+        position: relative;
+        min-width: 120px;
+        /* 추가중 */
+        z-index: 5;
+    }
+    .subMenu a{
+        /* 수정끝 */
+        font-size: 21px;    
+        line-height: 150%;
+    }
+    .asideMenuItem ul{
+        /* 한줄 추가 */
+        display: none;   
+    }
+    .asideMenu a{
+        color: #666;
+        font-size: 14px;
+    }
+    .asideMenuItem > a{
+        font-size: 21px;
+        color: #333;
+    }
+    .toggleBtnIcon{
+        display: block;
+    }
+
+    .brandStoryMenu a{
+        /* 수정끝 */
+        font-size: 14px;    
+        line-height: 400%;
+        color: #666;
+    }
+    .headerGnavContents .shopping{
+        top: 0;
+        left: 0;
+    }
+    .headerGnavContents .brandStoryMenu{
+        top: 340px;
+    }
+    .searchGnavMainItem{
+        display: flex;
+    }
+    .searchMenuWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        max-width: 950px;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        height: 100vh;
+        padding-top: 10px;
+        /* 2에서 3으로 수정 */
+        z-index: 3;
+        background: #fff;
+        visibility: hidden;
+    }
+    .recommendedMenu{
+        display: flex;
+        gap: 50px;/*카테고리 간격*/
+        margin-top: 50px;
+    }
+    .recommendedMenu img{
+        display: block;
+        width: 60px;
+        height: 60px;
+    }
+    .recommendedMenu a{
+        font-size: 20px;
+        color: #222;
+        display: block;
+        line-height: 100%;
+        align-self: center;
+    }
+    .recommendedMainItem p{
+        margin-bottom: 10px;
+    }
+    .recommendedSubMenu li{
+        display: flex;
+        min-width: 280px;
+        max-width: 280px;
+        background: #fcfafa;
+        border-bottom: 2px solid #fff;
+    }
+    .recommendedSubMenu > li:last-child{
+        margin-right: 0;
+    }
+    .searchIcon{
+        display: block;
+        width: 12px;
+        /* height: 12px; */
+        margin-top: 5px;
+        margin-left: 5px;
+        fill: #666;
+    }
+    
+    /* 네비 오버레이 태블릿*/
+    .gnavOverlay{
+        /* 수정완 */
+        pointer-events: none;
+        display: none;
+    }
+
+
+}
+/* 모바일형 헤더 -----------------------------------*/
+@media (max-width: 767px){
+
+}
+
 /* MainContents */
 .mainSection{
     width: 100%;
@@ -456,8 +863,17 @@ header{
     min-height: 100vh;
     margin: 0 auto;
     margin-bottom: 80px;/* 한섹션간의 간격 80px */
+    padding: 0 20px 0 20px;
+    /* border: 1px solid tomato; */
 }
-
+/* 섹션별 타이틀 기본스타일 */
+.sectionTitle{
+    margin:100px 0 10px 0;
+    font-family: "La Mer Headline KR", sans-serif, serif;
+    letter-spacing: -3px;
+    font-size: clamp(42px, calc(42px + 10 * ((100vw - 768px) / (1440 - 768))), 52px);
+    line-height: 90%;
+}
 /* 첫페이지 메인 */
 .mainContent_wrapper{
     display: flex;
@@ -467,11 +883,14 @@ header{
 .mainContentLeft_description{
     display: flex;
     flex-direction: column;
+    min-width: 400px;
+    flex: 1 0 0;
 }
-
 .mainContentLeft_description > h3{
-    margin:100px 0 100px 0;
-    font-size: 75px;
+    /* margin:100px 0 100px 0; */
+    margin-top:clamp(40px, calc(40px + (100 - 40) * ((100vw - 768px) / (1440 - 768))), 100px);
+    margin-bottom:clamp(40px, calc(40px + (100 - 40) * ((100vw - 768px) / (1440 - 768))), 100px);
+    font-size: clamp(55px, calc(55px + (75 - 55) * ((100vw - 768px) / (1440 - 768))) , 75px);
 }
 .introduction{
     flex-grow: 1;
@@ -487,6 +906,11 @@ header{
 .bigLogo{
     flex-grow: 0;
 }
+.mainConentRight_vedio{
+    flex-shrink: 0;
+        min-width: 0;
+        flex: 1 0 0;
+}
 
 /* 두번째 페이지 데이앤나이트리뉴얼 */
 .bestProductTitle_wrapper > h3{
@@ -501,13 +925,13 @@ header{
 .bestProductTitle_wrapper p{
     margin-bottom: 50px;
 }
-.imageBox{
+.imageBoxProjuctList{
     position: relative;
     background: #F3F4F6;
     width: 421px;
     height: 524px;
 }
-.imageBox img{
+.imageBoxProjuctList img{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -516,7 +940,7 @@ header{
     opacity: 0;
     transition: opacity 0.2s linear;
 }
-.imageBox:hover .productImage_hover{
+.imageBoxProjuctList:hover .productImage_hover{
     opacity: 1;
 }
 
@@ -527,10 +951,10 @@ header{
     display: flex;
     justify-content:space-around;
 }
-.bestProducts_wrapper > ul > li{
+.bestProducts_wrapper > ul li{
     display: flex;
     flex-direction: column;
-    width: 421px;
+    width: 33.3%;
 }
 /* 제품용량박스 */
 .productSizeBox{
@@ -538,11 +962,11 @@ header{
     justify-content: flex-start;
     gap: 10px;
     width: 100%;
-    padding: 0;
 }
 .productSizeBox li{
     display: block;
-    padding: 10px 0 10px 0;
+    padding: 10px 0;
+    flex-basis: 0;
 }
 .productSizeBox a{
     display: block;
@@ -552,6 +976,26 @@ header{
     line-height: 28px;
     border: 0.5px solid #555;
 }
+.productSizeBoxSlide{
+    display: flex;
+}
+.productSizeBoxSlideBtn{
+    margin-top: 20px;
+    display: none;
+}
+.productSizeBoxSlideBtn a{
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #666;
+    border-right: 1px solid #666;
+}
+.productSizeBoxSlideBtn .productSizeBoxPrevBtn{
+    transform: rotate(225deg);
+}
+.productSizeBoxSlideBtn .productSizeBoxNextBtn{
+    transform: rotate(45deg);
+}
+
 .productItemTitle{
     font-size: 14px;
     font-weight: 500;
@@ -567,32 +1011,21 @@ header{
 }
 /* 세번째 페이지 대표제품 및 베스트셀러 바로가기 링크 */
 .productDescription> div > h3{
-    font-size: 52px;
     font-weight:500;
     letter-spacing: 0.2px;
     line-height: 140%;
 }
-.productIntro_wrapper > ul{
+.productIntro_wrapper{
     display: flex;
     justify-content: center;
     gap: 10px;
 }
-.productIntro_wrapper a{
-    display: block;
-    width: 720px;
-    height: 900px;
+.productIntro_wrapper img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
-.productIntro_wrapper > ul li:nth-child(1) a{
-    background-image: url(https://www.lamerkorea.com/media/export/cms/homepage/2025/MAR25/LM_0203_main_05.jpg);
-}
-.productIntro_wrapper > ul li:nth-child(2) a{
-    background-image: url(https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_02.jpg);
-}
-/* 네번째페이지 대표제품 슬라이더 */
-.productSlide_wrapper ul{
-    /* display: flex; */
-    /* border : 1px solid tomato; */
-}
+/* 네번째페이지 대표제품모음 */
 .productSlide_wrapper > ul li{
     display: flex;
     justify-content: space-around;
@@ -604,6 +1037,10 @@ header{
 .productDescription{
     display: flex;
     flex-direction: column;
+    /* 추가 */
+    flex-shrink: 1;
+    flex-grow: 3;
+    flex-basis: 20%;
 }
 .productDescTop > .sectionTitle{
     margin-top: 0;
@@ -613,11 +1050,20 @@ header{
     line-height: 160%;
     color:#666;
 }
-.bigsizeImage img{
-    width: 720px;
-    height: 900px;
+.imageBox{
+    position: relative;
+    background: #F3F4F6;
+    aspect-ratio: 421/524;
+    width: clamp(321px, 20vw ,421px);
 }
-
+.imageBox img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 /* 다섯번째페이지 프로모션 */
 .promotionPage_wrapper{
     display: flex;
@@ -650,21 +1096,86 @@ header{
 .serviceGuide_wrapper .readMoreLink{
     margin-top: 5px;
 }
+/* 테블릿형 767px~1023px 메인 */
+@media (max-width: 1023px){
 
+    .mainSection{
+        max-width: 1023px;
+        border: 1px solid green;
+    }
+    /* 1번째 페이지 메인 */
+    .mainContent_wrapper{
+        gap: 30px;
+        min-width: 0;
+    }
+    .mainContentLeft_description{
+        height: 800px;
+        min-width: 400px;
+        flex: 1 0 0;
+    }
+    .mainContentLeft_description > h3{
+        /* font-size: 60px; */
+        margin-bottom:30px;
+    }
+    .mainConentRight_vedio{
+        margin-top: 100px;
+        min-width: 0;
+        flex: 1 0 0;
+    }
+    .introduction{
+        font-size: 18px;
+    }
+    .bigLogo{
+        width: 400px;
+    }
+
+    /* 2번째 페이지 상품리스트 */
+    .imageBoxProjuctList{
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+    .bestProducts_wrapper > ul{
+        max-width: 1023px;
+    }
+    .bestProducts_wrapper > ul{
+        gap: 10px;
+    }
+    .productSizeBox{
+        overflow: hidden;
+    }
+    .productSizeBoxSlide .productSizeBox{
+        padding: 0 10px;
+    }
+    .productSizeBoxSlideBtn{
+        display: block;
+    }
+
+    /* 3번째 페이지 대표메뉴 바로가기 링크*/
+    /* 4번째 페이지 대표제품 설명 */
+    /* 5번째 페이지 이달의프로모션 */
+}
+/* 모바일형 메인 */
+@media (max-width: 767px){
+    .mainSection{
+        max-width: 1023px;
+        border: 1px solid blue;
+    }
+}
 /* 푸터 */
 .footer_wrapper{
     margin: 0 auto;
-    margin-top: -80px;/*메인섹션과 푸터 거리가 넓어서 간격좁힘*/
+    margin-top: -280px;/*메인섹션과 푸터 거리가 넓어서 간격좁힘*/
+    padding-left: 20px;
     max-width: 1440px;
-    /* border: 1px solid tomato; */
 }
 .footerTop{
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     margin-bottom: 60px;
 }
 .footerTop .newsletter{
-    flex: 1;
+    flex: 0;
     max-width: 310px;
 }
 .footerTop .sectionTitle{
@@ -696,10 +1207,10 @@ header{
 }
 .footerTop .infoMenu{
     display: flex;
-    flex: 1;
-    gap: 120px;
-    justify-content: flex-end;
-    margin: 100px 200px 0 350px;
+    gap: 130px;
+    padding: 100px 0;
+    margin-right: 200px;
+    margin-right: clamp(20px,calc(20px + (200 - 20) * ((100vw - 768px) / (1440 - 768))), 200px);
 }
 .infoHeading{
     font-size: 15px;
@@ -723,6 +1234,7 @@ header{
 }
 .footerBottom>li:first-child{
     margin-right: 500px;
+    margin-right: clamp(50px,calc(50px + (500 - 50) * ((100vw - 768px) / (1440 - 768))),500px);
     font-size: 13px;
     text-align: center;
     line-height: 250%;
@@ -748,7 +1260,14 @@ header{
     height: 20px;
     vertical-align: middle;
 }
+/* 테블릿형 767px~1023px 푸터 */
+@media (max-width: 1023px){
+   
+}
+/* 모바일형 푸터 */
+@media (max-width: 767px){
 
+}
 /* 기타 버튼 및 팝업 (상담원채팅연결, 백투탑버튼)*/
 .chatButton{
     position: fixed;

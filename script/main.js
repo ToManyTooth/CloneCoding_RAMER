@@ -66,13 +66,12 @@
     });
 })(); // 프로모션 슬라이더 끝
 
-// 네비게이션
+//네비게이션
 let mainMenu = $('.headerGnavMainItem');
 let prevSubMenu = $('.headerGnavContents');
 let cartMenu = $('.headerGnavMainItemCart');
 let overlay = $('.gnavOverlay');
 let closeBtn = $('.closeButton');
-
 
 mainMenu.hover(function(){
     if($(this).is('.headerGnavMainItemCart')){
@@ -82,7 +81,7 @@ mainMenu.hover(function(){
     
     let currentSubMenu = $(this).find('.headerGnavContents');
     currentSubMenu.css('visibility','visible');
-    $('body').css('overflow', 'hidden');
+    $('body').css('overflow', 'hidden');//스크롤막기
     overlay.css('visibility','visible');
 },function(){
     overlay.mouseover(function(){
@@ -94,7 +93,7 @@ mainMenu.hover(function(){
 //네비 클로즈버튼
 closeBtn.on('click',function(){
     prevSubMenu.css('visibility','hidden');
-        $('body').css('overflow', 'auto');
+    $('body').css('overflow', 'auto');
     overlay.css('visibility','hidden');
 });
 //장바구니 팝업창
@@ -130,12 +129,112 @@ $(window).on('scroll', function(){
             };
         };
     });
-
-    
 });
 // $(window).scrollTop();//뷰포트(브라우저창)의 맨위 위치
 // $(window).height();//뷰포트의 전체높이 == 화면 높이
 // $('섹션').offset().top;//섹션이 scrollTop에서 얼마나 떨어져있는지
+
+//모바일,태블릿 - 햄버거 메뉴 버튼
+let hamburgerGnav = $('.headerGnav');
+let hamburgerGnavBackground = $('.headerGnavContentsBackground');
+let hamburgerToggleButton = $('.hamburgerToggleButton');
+let hamburgerOnButton = $('.hamburgerOnButton');
+let hamburgerOffButton = $('.hamburgerOffButton');
+let brandStoryMenu = $('.brandStoryMenu');
+let windowWidth = $(window).width();
+let categoryGap = 30;
+
+hamburgerToggleButton.on('click',function(){
+    const brandStoryTop = $('.brandStoryMenu').offset().top;
+    windowWidth = $(window).width();
+    if(windowWidth<=1023){
+        let humburgerBtnOn = $(this).data('open');
+        if(humburgerBtnOn){
+            $(this).data('open',false);
+            humburgerBtnOn = $(this).data('open');
+            hamburgerOnButton.css('visibility','visible');
+            hamburgerOffButton.css('visibility','hidden');
+            hamburgerGnav.css('display','none');
+            hamburgerGnavBackground.css('display','none');
+            $('body').css('overflow', 'auto');//스크롤 보이기
+
+            //카테고리안에 폴딩 메뉴 접기
+            plusBtn.each(function(){
+                $(this).data('open', false);
+                $(this).next('ul').css('display', 'none');
+                $(this).children('.plusButton').css('visibility','visible');
+                $(this).children('.minusButton').css('visibility','hidden');
+            });
+        }else{
+            $(this).data('open',true);
+            humburgerBtnOn = $(this).data('open');
+            hamburgerOnButton.css('visibility','hidden');
+            hamburgerOffButton.css('visibility','visible');
+            hamburgerGnav.css('display','block');
+            hamburgerGnavBackground.css('display','block');
+            $('body').css('overflow', 'hidden');//스크롤막기
+
+            //브랜드 스토리 top위치 재조정
+
+            let shoppingMenuHeight = $('.shopping').outerHeight();
+            let asideHeight = $('.asideMenu').outerHeight();
+            let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
+
+            brandStoryMenu.css('top', brandStoryNewTop);
+        }
+    }
+});
+
+//모바일,태블릿 - 햄버거 메뉴 안의 폴딩메뉴 및 브랜드스토리 top위치 재조정 
+let plusBtn = $('.categoryToggleButton');
+$(this).data('open', false);//초기상태 설정
+
+if(windowWidth<=1023){
+    plusBtn.on('click', function(){
+        let minusBtnOn = $(this).data('open');
+        let currentCategory = $(this).next('ul');
+        if(minusBtnOn){
+            $(this).data('open', false);
+            currentCategory.css('display', 'none');
+            $(this).children('.plusButton').css('visibility','visible');
+            $(this).children('.minusButton').css('visibility','hidden');
+        }
+        else{
+            $(this).data('open', true);
+            currentCategory.css('display', 'block');
+            $(this).children('.plusButton').css('visibility','hidden');
+            $(this).children('.minusButton').css('visibility','visible');
+        }
+
+        let shoppingMenuHeight = $('.shopping').outerHeight();
+        let asideHeight = $('.asideMenu').outerHeight();
+        let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
+
+        brandStoryMenu.css('top', brandStoryNewTop);
+    });
+}
+
+
+//모바일,태블릿 -> PC버전으로 돌아갔을때 초기화
+$(window).on('resize', function(){
+    windowWidth = $(window).width();
+    if(windowWidth > 1023){
+        hamburgerToggleButton.data('open',false);
+        hamburgerGnav.css('display','none');
+        hamburgerGnavBackground.css('display','none');
+        hamburgerOnButton.css('visibility','visible');
+        hamburgerOffButton.css('visibility','hidden');
+        $('body').css('overflow', 'auto');//스크롤 보이기
+
+        plusBtn.each(function(){
+            $(this).data('open', false);
+            $(this).next('ul').css('display', 'none');
+            $(this).children('.plusButton').css('visibility','visible');
+            $(this).children('.minusButton').css('visibility','hidden');
+        });
+    }
+});
+
 
 //스티키헤더
 let prevScrollTop = 0;
@@ -163,6 +262,14 @@ setInterval(function(){
     };
 },500);
 
+//상품용량 슬라이드(두번째 페이지)
+$('.productSizeBoxPrevBtn').on('click', function(){
+    $('.productSizeBoxSlide').find($('.productSizeBox')).css({justifyContent:'flex-start'});
+});
+$('.productSizeBoxNextBtn').on('click', function(){
+    $('.productSizeBoxSlide').find($('.productSizeBox')).css({justifyContent:'flex-end'});
+});
+
 //백투탑 버튼
 $('.backToTopButton').on('click',function(){
     window.scrollTo({
@@ -170,3 +277,5 @@ $('.backToTopButton').on('click',function(){
         behavior : 'smooth'
     });
 });
+
+
