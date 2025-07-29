@@ -90,12 +90,47 @@ mainMenu.hover(function(){
         overlay.css('visibility','hidden');
     });
 });
-//네비 클로즈버튼
-closeBtn.on('click',function(){
-    prevSubMenu.css('visibility','hidden');
-    $('body').css('overflow', 'auto');
+
+//네비 닫힘 함수
+function closeNav($curNavContentsMenu){
+    if($curNavContentsMenu && $curNavContentsMenu.length > 0){
+        $curNavContentsMenu.css('visibility','hidden');
+    }
+     $('body').css('overflow', 'auto');
     overlay.css('visibility','hidden');
-});
+}
+
+// //네비 클로즈버튼
+// //document사용이유 클론시점이랑 dom 생성이 안맞아서 빈객체 현상 발생
+// $(document).on('click', '.closeButton',function(){
+//     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+//     if(isDesktop){ //pc버전일때
+//         closeNav(prevSubMenu);
+//     }else{
+//         const $searchContents = $('.clonedSearchItem .headerGnavContents');
+//         // closeNav($searchContents);
+//         $searchContents.hide();
+//     }
+// });
+
+//서치메뉴만 닫힘 다른것도 다 닫게 해주면 될듯!!
+
+
+
+
+// closeBtn.on('click',function(){
+//     console.log('눌림');
+//     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+//     if(isDesktop){ //pc버전일때
+//         closeNav(prevSubMenu);
+//     }else{
+//         const $searchContents = $searchItem.find('.headerGnavContents');
+//         // closeNav($searchContents);
+//         $searchContents.hide();
+//     }
+// });
+
+
 //장바구니 팝업창
 cartMenu.on('mouseenter',function(){
     $('.cartPopup').css('display', 'block');
@@ -144,19 +179,88 @@ let brandStoryMenu = $('.brandStoryMenu');
 let windowWidth = $(window).width();
 let categoryGap = 30;
 
+let hasClonedSearchMenu = false;
+let clonedSearchMenuOn = false;
+
 hamburgerToggleButton.on('click',function(){
     const brandStoryTop = $('.brandStoryMenu').offset().top;
     windowWidth = $(window).width();
     if(windowWidth<=1023){
         let humburgerBtnOn = $(this).data('open');
-        if(humburgerBtnOn){
-            $(this).data('open',false);
+        if(clonedSearchMenuOn){//검색창 열린상태면 지워주기
+            $('.clonedSearchItem').remove();
+            hasClonedSearchMenu = false;
+            clonedSearchMenuOn = false;
+
+             $(this).data('open',false);
             humburgerBtnOn = $(this).data('open');
+
             hamburgerOnButton.css('visibility','visible');
             hamburgerOffButton.css('visibility','hidden');
+            hamburgerGnavBackground.css('display','none');
+        }
+
+        if(!humburgerBtnOn){//햄버거 버튼 열기
+             $(this).data('open',true);
+            humburgerBtnOn = $(this).data('open');
+            hamburgerGnav.css('display','block');
+            
+            hamburgerOnButton.css('visibility','hidden');
+            hamburgerOffButton.css('visibility','visible');
+            hamburgerGnavBackground.css('display','block');
+            $('body').css('overflow', 'hidden');//스크롤막기
+
+            //검색메뉴
+            if(!hasClonedSearchMenu){
+
+                const $searchItem = $('.searchNavItem').clone();
+                $searchItem.addClass('clonedSearchItem');
+
+                const $searchBtn = $searchItem.find('.searchGnavMainItem');
+                const $searchContents = $searchItem.find('.headerGnavContents');
+                const searchCloseBtn = $searchItem.find('.closeButton');
+
+                $searchContents.hide();
+                
+                $searchBtn.on('click',function(e){//검색버튼 클릭시
+                    e.preventDefault();
+                    $searchContents.show();
+                    searchCloseBtn.css('visibility','visible');
+                    
+                    hamburgerOnButton.css('visibility','visible');
+                    hamburgerOffButton.css('visibility','hidden');
+                    hamburgerGnavBackground.css('display','none');
+
+                    clonedSearchMenuOn = true;
+                });
+                
+                $('.brandStoryListItem').after($searchItem);
+                hasClonedSearchMenu = true;
+            }
+
+            //브랜드 스토리 top위치 재조정
+            let shoppingMenuHeight = $('.shopping').outerHeight();
+            let asideHeight = $('.asideMenu').outerHeight();
+            let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
+
+            brandStoryMenu.css('top', brandStoryNewTop);
+
+
+
+        }else{//햄버거 버튼 닫기
+            $(this).data('open',false);
+            humburgerBtnOn = $(this).data('open');
             hamburgerGnav.css('display','none');
+
+            hamburgerOnButton.css('visibility','visible');
+            hamburgerOffButton.css('visibility','hidden');
             hamburgerGnavBackground.css('display','none');
             $('body').css('overflow', 'auto');//스크롤 보이기
+            
+            //검색메뉴 클론 삭제
+            $('.clonedSearchItem').remove();
+            hasClonedSearchMenu = false;
+            clonedSearchMenuOn = false;
 
             //카테고리안에 폴딩 메뉴 접기
             plusBtn.each(function(){
@@ -165,22 +269,6 @@ hamburgerToggleButton.on('click',function(){
                 $(this).children('.plusButton').css('visibility','visible');
                 $(this).children('.minusButton').css('visibility','hidden');
             });
-        }else{
-            $(this).data('open',true);
-            humburgerBtnOn = $(this).data('open');
-            hamburgerOnButton.css('visibility','hidden');
-            hamburgerOffButton.css('visibility','visible');
-            hamburgerGnav.css('display','block');
-            hamburgerGnavBackground.css('display','block');
-            $('body').css('overflow', 'hidden');//스크롤막기
-
-            //브랜드 스토리 top위치 재조정
-
-            let shoppingMenuHeight = $('.shopping').outerHeight();
-            let asideHeight = $('.asideMenu').outerHeight();
-            let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
-
-            brandStoryMenu.css('top', brandStoryNewTop);
         }
     }
 });
@@ -234,6 +322,28 @@ $(window).on('resize', function(){
         });
     }
 });
+
+//네비 클로즈버튼
+//document사용이유 클론시점이랑 dom 생성이 안맞아서 빈객체 현상 발생
+$(document).on('click', '.closeButton',function(){
+            console.log('클로즈버튼 눌림');
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    if(isDesktop){ //pc버전일때
+            console.log('PC클로즈버튼 눌림');
+
+        prevSubMenu.css('visibility','hidden');
+        overlay.css('visibility','hidden');
+    }else{
+            console.log('MOBILE클로즈버튼 눌림');
+
+        const $searchContents = $('.clonedSearchItem .headerGnavContents');
+        $searchContents.hide();
+        hamburgerGnav.css('display','none');
+        hamburgerGnavBackground.css('display','none');
+    }
+    $('body').css('overflow', 'auto');
+});
+
 
 
 //스티키헤더

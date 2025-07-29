@@ -92,6 +92,21 @@ input[type="email"],[type="tel"]{
     font-size: 15px;
     outline: none;
 }
+
+
+/* input[type="search"]{
+    border: none;
+    border-bottom: 1px solid #aaa;
+    width: 900px;
+    text-align: center;
+    padding: 15px;
+    margin-top: 0px;
+    font-size: 15px;
+}
+input[type="search"]::-webkit-search-cancel-button{
+    display: none;
+} */
+
 input[type="search"]{
     border: none;
     border-top: 1px solid #aaa;
@@ -104,6 +119,11 @@ input[type="search"]{
 input[type="search"]::-webkit-search-cancel-button{
     display: none;
 }
+
+
+
+
+
 /* radio 버튼 컬러변경 */
 [type="radio"]{
     accent-color: black;
@@ -165,6 +185,7 @@ header{
     max-width: 1440px;
     margin: 0 auto;
     height: 50px;
+    border-bottom: 1px solid #d7d7d7;
 }
 .promotionWrapper{
     display: flex;
@@ -483,9 +504,6 @@ header{
 /* -----------테블릿형 767px~1023px 헤더 --------------------*/
 
 @media (max-width: 1023px){
-    .headerTop{
-        border: 1px solid rgb(2, 2, 15);
-    }
     .mobileVersionNavMenu{
         display: flex;
         align-items: center;
@@ -552,16 +570,9 @@ header{
     }
 
     /* 
-    스크롤 만드려는 와중에 
-    headerGnavMainMenu 이게 세로 정렬이 안되있고
-    단순히 위 가로 카테고리 숨기기만한거라 
-    세로 정렬부터 해주자 
-    현상황은 로고에 가려져 있는듯함,
-
-    스크롤 하려다가 여러방법에서 막히고
-    검색 먼저 넣으려고 하니 저 상태라 
-    세로 정렬 후 스크롤 연구하기
-    
+    검색내부 카테고리 세로 정렬하기
+    스크롤 연구하기
+    로그인 위치 바꾸기 
     */
 
     .headerGnavMainMenu{
@@ -582,45 +593,36 @@ header{
         margin: 0; */
     }
     .PCVersionGnavHover{
-        /* visibility: hidden; 
-        세로 정렬중 
-        
-        
-        */
-
-        visibility: visible;
-
-
+        visibility: hidden; 
     }
+    
     /* X클로즈버튼 태블릿 */
     .closeButton{
-        cursor: pointer;
+        /* cursor: pointer;
         width: 20px;
         height: 20px;
         position: absolute;
         top: 20px;
         right: 3%;
-        z-index: 3;
+        z-index: 3; */
+        /* 추가 */
+        visibility: hidden;
     }
     .searchCloseButton{
         top: 15px;
         right: 5px;
     }
     .closeButton:before, .closeButton:after {
-        content: '';
+        /* content: '';
         position: absolute;
         left: 7px;
         width: 1px;
-        height: 20px;
-        background-color: #888;
+        background-color: #888; */
+        /* 추가중 */
+        left: -19px;
+        top: 8px;
+        height: 15px;
     }
-    .closeButton::before{
-        transform: rotate(45deg);
-    }
-    .closeButton::after{
-        transform: rotate(-45deg);
-    }
-
     /* 햄버거 버튼 */
     .hamburgerToggleButton{
         cursor: pointer;
@@ -690,16 +692,15 @@ header{
     }
     .cartPopup{
         /* 수정완 */
-        left: -255px;
+        top: 20px;
+        left: -270px;
     }
+
 /* 
 모바일 메뉴 킨상태에서 화면 늘리면 이상해짐. 일단 나중에 고치자
 긴화면에서 모바일태블릿으로 줄이고 햄버거 누르면 안보임( 검색 시스템이 가려지는듯함)
-검색 추가하기,
-엑스는 서치메뉴 나올때만 보이고 끄게 하기
 스크롤이 안되는거 고치기,
 +스크롤 자세히 보면 해당 영역만 스크롤생김
-상단 슬라이더 위아래 선 추가하기,
 모바일도 똑같이 적용시키기
 
 */
@@ -784,12 +785,27 @@ header{
     .headerGnavContents .brandStoryMenu{
         top: 340px;
     }
+
+    /*  검색 클론 css추가  */
+    .clonedSearchItem {
+        visibility: visible;
+        display: flex;
+        padding: 0;
+    }
+    .clonedSearchItem .headerGnavContents {
+        top: -330px;
+    }
+    .clonedSearchItem .searchMenuWrapper{
+        visibility: visible;
+        flex-direction: column; 
+        /* 방향 바꿨음 왼쪽으로 붙이고 너비 조절하기 */
+    }
+
     .searchGnavMainItem{
         display: flex;
     }
     .searchMenuWrapper{
         display: flex;
-        flex-direction: column;
         align-items: center;
         position: relative;
         max-width: 950px;
@@ -804,9 +820,16 @@ header{
         visibility: hidden;
     }
     .recommendedMenu{
-        display: flex;
-        gap: 50px;/*카테고리 간격*/
-        margin-top: 50px;
+        /* display: flex;
+        gap: 50px;
+        margin-top: 50px; */
+        
+        /* 추가했음 */
+        flex-direction: column;
+        overflow-y: auto;
+        margin-top: 20px;
+        gap: 0;
+        width: 100%;
     }
     .recommendedMenu img{
         display: block;
@@ -822,13 +845,25 @@ header{
     }
     .recommendedMainItem p{
         margin-bottom: 10px;
+
+        /* 추가 */
+        background: #fcfafa;
+        height: 40px;
+        line-height: 40px;
+        /* width: 100%; */
+        margin-left: 30px;
+
     }
     .recommendedSubMenu li{
         display: flex;
         min-width: 280px;
-        max-width: 280px;
-        background: #fcfafa;
-        border-bottom: 2px solid #fff;
+        /* max-width: 280px; */
+        
+        /* 변경점 */
+        max-width: 100%;
+        background: #fff;
+        border-bottom: 1px solid #d7d7d7;
+
     }
     .recommendedSubMenu > li:last-child{
         margin-right: 0;
@@ -841,6 +876,17 @@ header{
         margin-left: 5px;
         fill: #666;
     }
+
+    /* input search 커스텀중 */
+    .clonedSearchItem .searchPC{
+        width: 900px;
+        border-top: none;
+        border-bottom: 1px solid #aaa;
+        text-align: center;
+        margin-top: 0px;
+        font-size: 15px;
+    }
+
     
     /* 네비 오버레이 태블릿*/
     .gnavOverlay{
@@ -848,8 +894,6 @@ header{
         pointer-events: none;
         display: none;
     }
-
-
 }
 /* 모바일형 헤더 -----------------------------------*/
 @media (max-width: 767px){
@@ -908,8 +952,8 @@ header{
 }
 .mainConentRight_vedio{
     flex-shrink: 0;
-        min-width: 0;
-        flex: 1 0 0;
+    min-width: 0;
+    flex: 1 0 0;
 }
 
 /* 두번째 페이지 데이앤나이트리뉴얼 */
@@ -1101,7 +1145,7 @@ header{
 
     .mainSection{
         max-width: 1023px;
-        border: 1px solid green;
+        /* border: 1px solid green; */
     }
     /* 1번째 페이지 메인 */
     .mainContent_wrapper{
@@ -1152,6 +1196,13 @@ header{
     }
 
     /* 3번째 페이지 대표메뉴 바로가기 링크*/
+    .mainSection:nth-child(3){
+        min-height: 80vh;
+    }
+    .productIntro_wrapper{
+        margin-top: 80px;
+    }
+
     /* 4번째 페이지 대표제품 설명 */
     /* 5번째 페이지 이달의프로모션 */
 }
