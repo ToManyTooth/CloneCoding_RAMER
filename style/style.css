@@ -36,7 +36,8 @@ body{
     height: 100%;
     font-family: "La Mer Headline KR", sans-serif;
     padding-top: 130px;
-
+    /* margin: 0; */
+    /* overflow: hidden; */
 }
 .wrapper{
     width: 100%;
@@ -535,6 +536,7 @@ header{
     .headerGnav{
         position: absolute;
         width: 100%;
+        height: 100vh;
         top: 0;
         left: 0;
         z-index: -1;
@@ -548,15 +550,29 @@ header{
         position: absolute;
         left: 0;
         top: 0;
-        /* 이것저것 해보는중...스크롤만들기 */
-        /* top: 80px; */
-        /* height: calc(100vh - 80px); */
-        /* height: 100vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-        border: 5px solid red; */
-        /* border: 1px solid blue; */
     }
+    .headerGnavMainMenu{
+        display: flex;
+        /* 스크롤때문에 이것저것 해보는중 */
+        position: absolute;
+        top: 80px;
+        width: 100%;
+        height: calc(100vh - 130px);
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .headerGnavMainMenu>li{
+        flex-shrink: 0;
+    }
+    .headerGnavMainItem{
+        font-size: 14px;
+        color: #666;
+        padding: 30px 20px;
+    }
+    .PCVersionGnavHover{
+        visibility: hidden; 
+    }
+    
     /* 뒷배경 */
     .headerGnavContentsBackground{
         position: absolute;
@@ -568,34 +584,6 @@ header{
         z-index: -2;
         display: none;
     }
-
-    /* 
-    검색내부 카테고리 세로 정렬하기
-    스크롤 연구하기
-    로그인 위치 바꾸기 
-    */
-
-    .headerGnavMainMenu{
-        display: flex;
-    }
-    .headerGnavMainMenu>li{
-        flex-shrink: 0;
-    }
-    .headerGnavMainItem{
-        font-size: 14px;
-        color: #666;
-        padding: 30px 20px;
-
-        /* 추가 */
-        /* display: flex;
-        flex-direction: column;
-        padding: 0;
-        margin: 0; */
-    }
-    .PCVersionGnavHover{
-        visibility: hidden; 
-    }
-    
     /* X클로즈버튼 태블릿 */
     .closeButton{
         /* cursor: pointer;
@@ -697,12 +685,15 @@ header{
     }
 
 /* 
-모바일 메뉴 킨상태에서 화면 늘리면 이상해짐. 일단 나중에 고치자
-긴화면에서 모바일태블릿으로 줄이고 햄버거 누르면 안보임( 검색 시스템이 가려지는듯함)
-스크롤이 안되는거 고치기,
-+스크롤 자세히 보면 해당 영역만 스크롤생김
 모바일도 똑같이 적용시키기
 
+검색창에 스크롤이 검색 밑에부터 시작임..?
+
+나중에 추가할 디테일
+태블릿버전 검색기능 돋보기
+
+오류발견
+모바일 메뉴 킨상태에서 화면 늘리면 이상해짐.
 */
 
     /* 메인 네비 안에 메뉴들 태블릿 */
@@ -714,14 +705,12 @@ header{
         width: 100%;
         flex-direction: column;
         position: absolute;
-        top: 80px;
+        /* top: 80px; 스크롤 만들면서 위치 올려줌*/
         left: 0;
         padding: 0;
         margin: 0;
         height: auto;
         visibility: visible;
-        /* height: 700px; */
-        /* overflow: auto; */
     }
     .subMenu{
         position: absolute;
@@ -793,14 +782,14 @@ header{
         padding: 0;
     }
     .clonedSearchItem .headerGnavContents {
-        top: -330px;
+        position: fixed;
+        top: 120px;
     }
     .clonedSearchItem .searchMenuWrapper{
         visibility: visible;
         flex-direction: column; 
         /* 방향 바꿨음 왼쪽으로 붙이고 너비 조절하기 */
     }
-
     .searchGnavMainItem{
         display: flex;
     }
@@ -808,28 +797,25 @@ header{
         display: flex;
         align-items: center;
         position: relative;
-        max-width: 950px;
+        /* max-width: 950px; */
         width: 100%;
-        top: 100%;
         left: 0;
         height: 100vh;
         padding-top: 10px;
         /* 2에서 3으로 수정 */
         z-index: 3;
         background: #fff;
-        visibility: hidden;
+        /* 스크롤 때문에 none처리 */
+        display: none;
     }
     .recommendedMenu{
-        /* display: flex;
-        gap: 50px;
-        margin-top: 50px; */
-        
         /* 추가했음 */
         flex-direction: column;
-        overflow-y: auto;
         margin-top: 20px;
         gap: 0;
         width: 100%;
+        height: 80%;
+        overflow-y: auto;
     }
     .recommendedMenu img{
         display: block;
@@ -845,7 +831,6 @@ header{
     }
     .recommendedMainItem p{
         margin-bottom: 10px;
-
         /* 추가 */
         background: #fcfafa;
         height: 40px;
@@ -863,7 +848,6 @@ header{
         max-width: 100%;
         background: #fff;
         border-bottom: 1px solid #d7d7d7;
-
     }
     .recommendedSubMenu > li:last-child{
         margin-right: 0;
@@ -879,12 +863,14 @@ header{
 
     /* input search 커스텀중 */
     .clonedSearchItem .searchPC{
-        width: 900px;
+        width: 95%;
         border-top: none;
-        border-bottom: 1px solid #aaa;
+        border-bottom: 1px solid #585858;
         text-align: center;
         margin-top: 0px;
         font-size: 15px;
+        margin-left: 30px;
+        margin-right: 30px;
     }
 
     
@@ -897,7 +883,7 @@ header{
 }
 /* 모바일형 헤더 -----------------------------------*/
 @media (max-width: 767px){
-
+    
 }
 
 /* MainContents */
@@ -1325,6 +1311,8 @@ header{
     right: 0;
     bottom: 0;
     z-index: 9999;
+    /* 스크롤때문에 체크중 */
+    visibility: hidden;
 }
 .backToTopButton{
     position: fixed;

@@ -176,8 +176,10 @@ let hamburgerToggleButton = $('.hamburgerToggleButton');
 let hamburgerOnButton = $('.hamburgerOnButton');
 let hamburgerOffButton = $('.hamburgerOffButton');
 let brandStoryMenu = $('.brandStoryMenu');
+let plusBtn = $('.categoryToggleButton');
 let windowWidth = $(window).width();
 let categoryGap = 30;
+
 
 let hasClonedSearchMenu = false;
 let clonedSearchMenuOn = false;
@@ -198,7 +200,9 @@ hamburgerToggleButton.on('click',function(){
             hamburgerOnButton.css('visibility','visible');
             hamburgerOffButton.css('visibility','hidden');
             hamburgerGnavBackground.css('display','none');
+
         }
+        
 
         if(!humburgerBtnOn){//햄버거 버튼 열기
              $(this).data('open',true);
@@ -208,7 +212,11 @@ hamburgerToggleButton.on('click',function(){
             hamburgerOnButton.css('visibility','hidden');
             hamburgerOffButton.css('visibility','visible');
             hamburgerGnavBackground.css('display','block');
-            $('body').css('overflow', 'hidden');//스크롤막기
+
+            //바디 스크롤 막고 네비 카테고리 스크롤만 보이게
+            $('body').css('overflow', 'hidden');
+            hamburgerGnav.find('.headerGnavMainMenu').css('overflow-y','auto');
+
 
             //검색메뉴
             if(!hasClonedSearchMenu){
@@ -219,19 +227,31 @@ hamburgerToggleButton.on('click',function(){
                 const $searchBtn = $searchItem.find('.searchGnavMainItem');
                 const $searchContents = $searchItem.find('.headerGnavContents');
                 const searchCloseBtn = $searchItem.find('.closeButton');
-
+                
                 $searchContents.hide();
+                $searchContents.find('.searchMenuWrapper').css('display','block');
                 
                 $searchBtn.on('click',function(e){//검색버튼 클릭시
                     e.preventDefault();
+
                     $searchContents.show();
                     searchCloseBtn.css('visibility','visible');
                     
                     hamburgerOnButton.css('visibility','visible');
                     hamburgerOffButton.css('visibility','hidden');
-                    hamburgerGnavBackground.css('display','none');
+
+                    //겉메뉴의 스크롤 방지+서치메뉴의 리스트만 스크롤 보이게
+                    hamburgerGnav.find('.headerGnavMainMenu').css('overflow-y','hidden');
 
                     clonedSearchMenuOn = true;
+
+                    //카테고리안에 폴딩 메뉴 접기
+                    plusBtn.each(function(){
+                        $(this).data('open', false);
+                        $(this).next('ul').css('display', 'none');
+                        $(this).children('.plusButton').css('visibility','visible');
+                        $(this).children('.minusButton').css('visibility','hidden');
+                    });
                 });
                 
                 $('.brandStoryListItem').after($searchItem);
@@ -274,7 +294,6 @@ hamburgerToggleButton.on('click',function(){
 });
 
 //모바일,태블릿 - 햄버거 메뉴 안의 폴딩메뉴 및 브랜드스토리 top위치 재조정 
-let plusBtn = $('.categoryToggleButton');
 $(this).data('open', false);//초기상태 설정
 
 if(windowWidth<=1023){
@@ -282,12 +301,14 @@ if(windowWidth<=1023){
         let minusBtnOn = $(this).data('open');
         let currentCategory = $(this).next('ul');
         if(minusBtnOn){
+            console.log('마이너스눌림');
             $(this).data('open', false);
             currentCategory.css('display', 'none');
             $(this).children('.plusButton').css('visibility','visible');
             $(this).children('.minusButton').css('visibility','hidden');
         }
         else{
+            console.log('플러스눌림');
             $(this).data('open', true);
             currentCategory.css('display', 'block');
             $(this).children('.plusButton').css('visibility','hidden');
@@ -303,23 +324,46 @@ if(windowWidth<=1023){
 }
 
 
-//모바일,태블릿 -> PC버전으로 돌아갔을때 초기화
+//모바일,태블릿 -> PC 초기화
+let isPC = window.innerWidth > 1023;
 $(window).on('resize', function(){
-    windowWidth = $(window).width();
-    if(windowWidth > 1023){
-        hamburgerToggleButton.data('open',false);
-        hamburgerGnav.css('display','none');
-        hamburgerGnavBackground.css('display','none');
-        hamburgerOnButton.css('visibility','visible');
-        hamburgerOffButton.css('visibility','hidden');
-        $('body').css('overflow', 'auto');//스크롤 보이기
+    const newWidth = window.innerWidth;
+    const nowPC = newWidth > 1023;
 
-        plusBtn.each(function(){
-            $(this).data('open', false);
-            $(this).next('ul').css('display', 'none');
-            $(this).children('.plusButton').css('visibility','visible');
-            $(this).children('.minusButton').css('visibility','hidden');
-        });
+    if(nowPC !== isPC){
+        isPC = nowPC;
+
+        if(nowPC){//PC로 초기화
+            //햄버거 상태 초기화
+            hamburgerGnav.css('display','');
+            hamburgerToggleButton.data('open',false);
+            hamburgerGnavBackground.css('display','none');
+            //햄버거 버튼 초기화
+            hamburgerOnButton.css('visibility','visible');
+            hamburgerOffButton.css('visibility','hidden');
+            //열린 네비+뒷배경 닫기
+            $('.headerGnavContents').css('visibility','hidden');
+            $('.gnavOverlay').css('visibility','hidden');
+
+            //스크롤보이기
+            $('body').css('overflow', 'auto');
+
+            //검색메뉴 클론 삭제
+            $('.clonedSearchItem').remove();
+            hasClonedSearchMenu = false;
+            clonedSearchMenuOn = false;
+
+            //폴딩 카테고리 닫기
+            plusBtn.each(function(){
+                $(this).data('open', false);
+                $(this).next('ul').css('display', '');
+                $(this).children('.plusButton').css('visibility','visible');
+                $(this).children('.minusButton').css('visibility','hidden');
+            });
+
+        }else{//모바일,태블릿으로 초기화
+            $('body').css('overflow', 'auto');
+        }
     }
 });
 
