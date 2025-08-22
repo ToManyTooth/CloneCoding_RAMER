@@ -77,7 +77,7 @@
                             </ul>
                             <div class="arrowBtn"><a href="#" class="headerTopNextBtn"></a></div>
                         </div>
-                        <div class="login"><a href="javascript:void(0)">로그인</a></div>
+                        <div class="login PCVersionGnavHover"><a href="javascript:void(0)">로그인</a></div>
                     </div>       
                     <div class="headerBottom">
                         <div class="gnavLogo">
@@ -523,7 +523,7 @@
                                             <img src="https://www.lamerkorea.com/media/export/cms/products/responsive/lm_sku_LMKRA9_4x5_0.png?width=900&height=1125" alt="핸드&미스트 세트 이미지">
                                         </a>
                                     </div>
-                                    <a href="javascript:void(0)" class="shopNowLink">지금 쇼핑하기</a>
+                                    <a href="javascript:void(0)" class="shopNowLink promotionPageShopLink">지금 쇼핑하기</a>
                                 </div>
                             </div>
                             <div class="bigsizeImage">
@@ -613,34 +613,74 @@
                                  <a href="javascript:void(0)" class="signUpButton">가입하기</a>
                             </div>
                             <aside class="infoMenu">
-                                <ul class="infoMenuRamerStory">
-                                    <li><p class="infoHeading">라 메르 이야기</p></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">라 메르 스토리</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">원료에 대한 철학</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">미라클 브로스&trade;</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">블루 하트</a></li>
-                                </ul>
-                                <ul class="infoMenuSupportTeam">
-                                    <li><p class="infoHeading">고객관리지원팀</p></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">1644-3947</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">고객 문의</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">배송 및 교환</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">매장 찾기</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">라 메르 회사정보</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">채용 정보</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">고객지원 서비스</a></li>
-                                </ul>
-                                <ul class="infoMenuSNS">
-                                    <li><p class="infoHeading">팔로우</p></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">인스타그램</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">페이스북</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">핀터레스트</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">유튜브</a></li>
-                                    <li><a href="javascript:void(0)" class="infoLink">카카오 채널</a></li>
-                                </ul>
+                                <div class="infoSection">
+                                    <div class="infoHeader">
+                                        <p class="infoHeading">라 메르 이야기</p>
+                                        <button class="categoryToggleButton footerToggleButton" data-open = "false">
+                                            <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                            <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                        </button>
+                                    </div>
+                                    <ul class="infoItem">
+                                        <li><a href="javascript:void(0)" class="infoLink">라 메르 스토리</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">원료에 대한 철학</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">미라클 브로스&trade;</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">블루 하트</a></li>
+                                    </ul>
+                                </div>
+                                <div class="infoSection">
+                                    <div class="infoHeader">
+                                        <p class="infoHeading">고객관리지원팀</p>
+                                        <button class="categoryToggleButton footerToggleButton" data-open = "false">
+                                            <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                            <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                        </button>
+                                    </div>
+                                    <ul class="infoItem">
+                                        <li><a href="javascript:void(0)" class="infoLink">1644-3947</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">고객 문의</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">배송 및 교환</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">매장 찾기</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">라 메르 회사정보</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">채용 정보</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">고객지원 서비스</a></li>
+                                    </ul>
+                                </div>
+                                <div class="infoSection">
+                                    <div class="infoHeader">
+                                        <p class="infoHeading">팔로우</p>
+                                        <button class="categoryToggleButton footerToggleButton" data-open = "false">
+                                            <svg role="img" class="toggleBtnIcon plusButton"> <use xlink:href="#plus-med--large"></use></svg>
+                                            <svg role="img" class="toggleBtnIcon minusButton" > <use xlink:href="#minus"></use> </svg>
+                                        </button>
+                                    </div>
+                                    <ul class="infoItem">
+                                        <li><a href="javascript:void(0)" class="infoLink">인스타그램</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">페이스북</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">핀터레스트</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">유튜브</a></li>
+                                        <li><a href="javascript:void(0)" class="infoLink">카카오 채널</a></li>
+                                    </ul>
+                                </div>
                             </aside>
                         </div>
-                        <ul class="footerBottom">
+                        <div class="footerBottom">
+                            <div class="footerBottomL">
+                                <p>&copy; 라 메르 테크놀로지,lnc</p>
+                            </div>
+                            <div class="footerBottomR">
+                                <ul class="footerBottomItem">
+                                    <li><a href="javascript:void(0)"><strong>개인정보 처리방침</strong></a></li>
+                                    <li><a href="javascript:void(0)">Cookie 관리</a></li>
+                                    <li><a href="javascript:void(0)">정품 및 품질 보증</a></li>
+                                    <li><a href="javascript:void(0)">서비스 이용 약관</a></li>
+                                    <li><a href="javascript:void(0)" class="footerMenuCS">고객지원 서비스
+                                        <img src="https://www.lamerkorea.com/media/export/cms/eA_icon_gray-new1.png" alt="고객지원아이콘"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <ul class="footerBottom">
                             <li>&copy; 라 메르 테크놀로지,lnc</li>
                             <li><a href="javascript:void(0)"><strong>개인정보 처리방침</strong></a></li>
                             <li><a href="javascript:void(0)">Cookie 관리</a></li>
@@ -649,7 +689,7 @@
                             <li><a href="javascript:void(0)" class="footerMenuCS">고객지원 서비스
                                 <img src="https://www.lamerkorea.com/media/export/cms/eA_icon_gray-new1.png" alt="고객지원아이콘"></a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </footer>
             </div>

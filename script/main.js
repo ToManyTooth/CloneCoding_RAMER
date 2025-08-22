@@ -191,6 +191,7 @@ hamburgerToggleButton.on('click',function(){
         let humburgerBtnOn = $(this).data('open');
         if(clonedSearchMenuOn){//검색창 열린상태면 지워주기
             $('.clonedSearchItem').remove();
+            $('clonedLogin').remove();
             hasClonedSearchMenu = false;
             clonedSearchMenuOn = false;
 
@@ -224,6 +225,12 @@ hamburgerToggleButton.on('click',function(){
                 const $searchItem = $('.searchNavItem').clone();
                 $searchItem.addClass('clonedSearchItem');
 
+                //검색 카테고리 아래의 로그인메뉴도 복사
+                const $loginClone = $('.login').clone();
+                $loginClone.addClass('clonedLogin');
+                
+
+
                 const $searchBtn = $searchItem.find('.searchGnavMainItem');
                 const $searchContents = $searchItem.find('.headerGnavContents');
                 const searchCloseBtn = $searchItem.find('.closeButton');
@@ -255,6 +262,7 @@ hamburgerToggleButton.on('click',function(){
                 });
                 
                 $('.brandStoryListItem').after($searchItem);
+                $searchItem.after($loginClone);
                 hasClonedSearchMenu = true;
             }
 
@@ -279,6 +287,7 @@ hamburgerToggleButton.on('click',function(){
             
             //검색메뉴 클론 삭제
             $('.clonedSearchItem').remove();
+            $('.clonedLogin').remove();
             hasClonedSearchMenu = false;
             clonedSearchMenuOn = false;
 
@@ -296,32 +305,74 @@ hamburgerToggleButton.on('click',function(){
 //모바일,태블릿 - 햄버거 메뉴 안의 폴딩메뉴 및 브랜드스토리 top위치 재조정 
 $(this).data('open', false);//초기상태 설정
 
+// if(windowWidth<=1023){
+//     plusBtn.on('click', function(){
+//         let minusBtnOn = $(this).data('open');
+//         let currentCategory = $(this).next('ul');
+//         if(minusBtnOn){
+//             $(this).data('open', false);
+//             currentCategory.css('display', 'none');
+//             $(this).children('.plusButton').css('visibility','visible');
+//             $(this).children('.minusButton').css('visibility','hidden');
+//         }
+//         else{
+//             $(this).data('open', true);
+//             currentCategory.css('display', 'block');
+//             $(this).children('.plusButton').css('visibility','hidden');
+//             $(this).children('.minusButton').css('visibility','visible');
+//         }
+
+//         let shoppingMenuHeight = $('.shopping').outerHeight();
+//         let asideHeight = $('.asideMenu').outerHeight();
+//         let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
+
+//         brandStoryMenu.css('top', brandStoryNewTop);
+//     });
+// }
+
+
+
 if(windowWidth<=1023){
     plusBtn.on('click', function(){
         let minusBtnOn = $(this).data('open');
-        let currentCategory = $(this).next('ul');
-        if(minusBtnOn){
-            console.log('마이너스눌림');
-            $(this).data('open', false);
-            currentCategory.css('display', 'none');
-            $(this).children('.plusButton').css('visibility','visible');
-            $(this).children('.minusButton').css('visibility','hidden');
-        }
-        else{
-            console.log('플러스눌림');
-            $(this).data('open', true);
-            currentCategory.css('display', 'block');
-            $(this).children('.plusButton').css('visibility','hidden');
-            $(this).children('.minusButton').css('visibility','visible');
+        let currentCategory;
+        //footer 폴딩메뉴일때 메뉴찾기가 다름
+        if($(this).hasClass('footerToggleButton')){
+            //currentCategory = $(this).closest('.infoHeader').next('ul');
+            $(this).toggleClass('active');
+            $(this).closest('.infoSection').toggleClass('active')
+        }else{
+            //액티브 클래스 따로 만들기
+            currentCategory = $(this).next('ul');
+    
+            if(minusBtnOn){
+                $(this).data('open', false);
+                currentCategory.css('display', 'none');
+                $(this).children('.plusButton').css('visibility','visible');
+                $(this).children('.minusButton').css('visibility','hidden');
+            }
+            else{
+                $(this).data('open', true);
+                currentCategory.css('display', 'block');
+                $(this).children('.plusButton').css('visibility','hidden');
+                $(this).children('.minusButton').css('visibility','visible');
+            }
         }
 
-        let shoppingMenuHeight = $('.shopping').outerHeight();
-        let asideHeight = $('.asideMenu').outerHeight();
-        let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
-
-        brandStoryMenu.css('top', brandStoryNewTop);
+        if(!$(this).hasClass('footerToggleButton')){
+            let shoppingMenuHeight = $('.shopping').outerHeight();
+            let asideHeight = $('.asideMenu').outerHeight();
+            let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
+    
+            brandStoryMenu.css('top', brandStoryNewTop);
+        }
+    
     });
 }
+
+
+
+
 
 
 //모바일,태블릿 -> PC 초기화
@@ -350,6 +401,7 @@ $(window).on('resize', function(){
 
             //검색메뉴 클론 삭제
             $('.clonedSearchItem').remove();
+            $('.clonedLogin').remove();
             hasClonedSearchMenu = false;
             clonedSearchMenuOn = false;
 
@@ -382,6 +434,7 @@ $(document).on('click', '.closeButton',function(){
 
         const $searchContents = $('.clonedSearchItem .headerGnavContents');
         $searchContents.hide();
+        $('.clonedLogin').hide();
         hamburgerGnav.css('display','none');
         hamburgerGnavBackground.css('display','none');
     }
