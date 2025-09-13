@@ -373,8 +373,6 @@ if(windowWidth<=1023){
 
 
 
-
-
 //모바일,태블릿 -> PC 초기화
 let isPC = window.innerWidth > 1023;
 $(window).on('resize', function(){
@@ -469,7 +467,267 @@ setInterval(function(){
     };
 },500);
 
-//상품용량 슬라이드(두번째 페이지)
+//두번째 메인페이지 버튼&드래그 슬라이더(모바일만)
+let isMobile = window.innerWidth < 768;
+let isSliderSetup = false;
+let slideCurIndex = 2;
+let curTranslateX = 0;
+let slideWidth = $('.bestProductsSlide').outerWidth(true);
+
+function clearSlider(){
+    $('.bestProducts_wrapper').find('.bestProductsSlide.slideClone').remove();
+    $('.bestProducts_wrapper').off('mousedown touchstart');
+    $(document).off('mousemove mouseup touchmove touchend touchcancel');
+    $('.mainSlidePrevBtn').off('click');
+    $('.mainSlideNextBtn').off('click');
+    $('.bestProducts_wrapper').css({transform:'', transition:''});
+    isSliderSetup = false;
+}
+
+function initMobileSlider(){
+    const $slideWrapper = $('.bestProducts_wrapper');
+    let $slide = $('.bestProductsSlide');
+    
+    //초기화
+    clearSlider();
+
+    let slideLength = $slide.length;
+    let isAnimating = false;
+    slideWidth = $slide.outerWidth(true);
+    
+    //슬라이드 복제 앞2개 뒤에서2개
+    const $firstClone = $slide.eq(0).clone().addClass('slideClone');
+    const $secondClone = $slide.eq(1).clone().addClass('slideClone');
+    const $lastClone = $slide.last().clone().addClass('slideClone');
+    const $lastsecondClone = $slide.eq($slide.length - 2).clone().addClass('slideClone');
+    
+    $slideWrapper.append($firstClone);
+    $slideWrapper.append($secondClone);
+    $slideWrapper.prepend($lastClone);
+    $slideWrapper.prepend($lastsecondClone);
+    
+    //새로 추가된 슬라이드 갱신
+    $slide = $('.bestProductsSlide'); 
+    slideLength = $slide.length;
+    slideCurIndex = 2;
+    curTranslateX = 0;
+    $slideWrapper.css('transform',`translateX(-${slideWidth * slideCurIndex}px)`);//초기위치잡기
+    curTranslateX = -slideWidth * slideCurIndex;
+
+    function moveToPrevSlide(){
+        if(isAnimating) return;
+        isAnimating = true;
+    
+        slideCurIndex--;
+        $slideWrapper.css('transition','all 0.5s');
+        $slideWrapper.css('transform',`translateX(-${slideWidth * slideCurIndex}px)`);
+        curTranslateX = -slideWidth * slideCurIndex;
+        
+        if(slideCurIndex === 0){
+            setTimeout(function(){
+                slideCurIndex = slideLength-4;
+                $slideWrapper.css('transition','none');
+                $slideWrapper.css('transform',`translateX(-${slideWidth * slideCurIndex}px)`);
+                curTranslateX = -slideWidth * slideCurIndex;
+                isAnimating = false;
+            },500);
+        }else{
+            setTimeout(() => {
+                curTranslateX = -slideWidth * slideCurIndex;
+                isAnimating = false;
+            }, 500);
+        }
+    };
+    function moveToNextSlide(){
+        if(isAnimating) return;
+        isAnimating = true;
+    
+        slideCurIndex++;
+        $slideWrapper.css('transition','all 0.5s');
+        $slideWrapper.css('transform',`translateX(-${slideWidth * slideCurIndex}px)`);
+        curTranslateX = -slideWidth * slideCurIndex;
+
+        if(slideCurIndex === slideLength - 2){
+            setTimeout(function(){
+                slideCurIndex = 2;
+                $slideWrapper.css('transition','none');
+                $slideWrapper.css('transform',`translateX(-${slideWidth * slideCurIndex}px)`);
+                curTranslateX = -slideWidth * slideCurIndex;
+                isAnimating = false;
+            },500);
+        }else{
+            setTimeout(() => {
+                isAnimating = false;
+                curTranslateX = -slideWidth * slideCurIndex;
+            }, 500);
+        }
+    };
+    //버튼 이벤트
+    $('.mainSlidePrevBtn').on('click', moveToPrevSlide);
+    $('.mainSlideNextBtn').on('click', moveToNextSlide);
+
+    //드래그 이벤트
+    let startX = 0;
+    let isDragging = false;
+    let isTouch = false;    
+    $slideWrapper.on('mousedown',function(e){
+        if(isTouch) return;
+        if(e.cancelable) e.preventDefault();
+        //[Intervention] Ignored attempt to cancel a touchend event with cancelable=false,에 대한 에러 처리
+        dragAndTouchStartX(e);
+    });
+    $slideWrapper.on('touchstart', function(e){
+        isTouch = true;
+        if(e.cancelable) e.preventDefault();
+        dragAndTouchStartX(e);
+    }
+);
+    function dragAndTouchStartX(e){
+        if(isAnimating) return;
+        isDragging = true;
+        if(e.type === "touchstart"){
+            startX = e.originalEvent.touches[0].clientX;
+        }else{
+            startX = e.clientX;
+        }
+    }
+
+    $(document).on('mousemove touchmove', function(e){
+
+        if(!isDragging || isAnimating) return;
+        let moveX = 0;
+        if(e.type === "touchmove"){
+            moveX = e.originalEvent.touches[0].clientX;
+        }else{
+            moveX = e.clientX;
+        }
+        let temp = moveX - startX;
+        
+        const slideArea = $slideWrapper[0].getBoundingClientRect();
+        if(temp < -50){
+            isDragging = false;
+            moveToNextSlide();
+            return;
+        }
+        if(temp > 50){
+            isDragging = false;
+            moveToPrevSlide();
+            return;
+        }
+
+        $slideWrapper.css('transition', 'none');
+        $slideWrapper.css('transform', `translateX(${curTranslateX + temp}px)`);
+    });
+
+    
+     // $(document).on('mousemove touchmove', function(e){ preventDefault는 addEventListener로 관리해야함
+    // document.addEventListener('mousemove touchmove', function(e){
+    //     if(!isDragging || isAnimating) return;
+    //     let moveX = 0;
+    //     let moveY = 0;
+    //     if(e.type === "touchmove"){
+    //         moveX = e.originalEvent.touches[0].clientX;
+    //         moveY = e.originalEvent.touches[0].clientY;
+    //     }else{
+    //         moveX = e.clientX;
+    //         moveY = e.clientY;
+    //     }
+    //     let distanceX = moveX - startX;
+    //     let distanceY = moveY - startY;
+
+    //     if(Math.abs(distanceX) > 10 && Math.abs(distanceX) > Math.abs(distanceY)){
+    //         e.preventDefault();//확실히 가로슬라이드를 처리했을때
+    //     }
+        
+    //     const slideArea = $slideWrapper[0].getBoundingClientRect();
+    //     if(distanceX < -50){
+    //         isDragging = false;
+    //         moveToNextSlide();
+    //         return;
+    //     }
+    //     if(distanceX > 50){
+    //         isDragging = false;
+    //         moveToPrevSlide();
+    //         return;
+    //     }
+
+    //     $slideWrapper.css('transition', 'none');
+    //     $slideWrapper.css('transform', `translateX(${curTranslateX + distanceX}px)`);
+    // },{ passive : false });
+
+    
+    $(document).on('mouseup touchend',function(e){
+        if(!isDragging || isAnimating) return;
+        isDragging = false;
+        let endX = 0;
+        
+        if(e.type === "touchend"){
+            endX = e.originalEvent.changedTouches[0].clientX;
+        }else{
+            endX = e.clientX;
+        }
+        const distance = endX - startX;
+        const exTranslateX = curTranslateX;
+        let nextTranslateX = curTranslateX + distance;
+
+        if(distance < -50){//다음슬라이드
+            $slideWrapper.css('transition', 'none');
+            $slideWrapper.css('transform', `translateX(${nextTranslateX}px)`);
+            moveToNextSlide();
+        }else if(distance > 50){//이전
+            $slideWrapper.css('transition', 'none');
+            $slideWrapper.css('transform', `translateX(${nextTranslateX}px)`);
+            moveToPrevSlide();
+        }else{//원래 위치로
+            $slideWrapper.css('transition','all 0.5s');
+            $slideWrapper.css('transform',`translateX(${exTranslateX}px)`);
+        }
+    });
+    $(document).on('touchcancel', function(e){
+        if(!isDragging || isAnimating) return;
+        isDragging = false;
+        $slideWrapper.css('transition','all 0.5s');
+        $slideWrapper.css('transform',`translateX(${curTranslateX}px)`);
+    });
+    isSliderSetup = true;
+};
+
+let prevSlideWidth = 0;
+$(function(){
+    if(isMobile){
+        initMobileSlider();
+    }
+    $(window).on('resize', function(){
+        const nowMobile = window.innerWidth < 768;
+
+        if(nowMobile !== isMobile){
+            isMobile = nowMobile;
+
+            if(isMobile){
+                initMobileSlider();
+            }else{//pc 모드시 초기화
+                clearSlider();
+            }
+        }else if(isMobile && !isSliderSetup){
+            initMobileSlider();
+        }
+        if(isMobile && isSliderSetup){
+            const nowSlideWidth = $('.bestProductsSlide').outerWidth(true);
+            slideWidth = nowSlideWidth;//슬라이드 위치 갱신
+
+            if(prevSlideWidth !== nowSlideWidth){
+                const newTranslateX = -nowSlideWidth * slideCurIndex;
+                $('.bestProducts_wrapper').css('transition', 'none');
+                $('.bestProducts_wrapper').css('transform', `translateX(${newTranslateX}px)`);
+                curTranslateX = newTranslateX;
+                prevSlideWidth = nowSlideWidth;
+            }
+        }
+    });
+});
+
+
+//두번째 페이지 상품용량 슬라이드
 $('.productSizeBoxPrevBtn').on('click', function(){
     $('.productSizeBoxSlide').find($('.productSizeBox')).css({justifyContent:'flex-start'});
 });
@@ -484,5 +742,4 @@ $('.backToTopButton').on('click',function(){
         behavior : 'smooth'
     });
 });
-
 
