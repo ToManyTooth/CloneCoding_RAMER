@@ -4,65 +4,70 @@
     let promotionPrevBtn = $('.headerTopPrevBtn');
     let promotionNextBtn = $('.headerTopNextBtn');
     let promotionListLength = promotionList.length;
-    let autoSlider = null;
+    let isclick = false;
     let currentIdx = 0;
+    let sliderInterval = null;
 
-    //5초 자동 슬라이더
+    //4초 자동 슬라이더
     promotionList.eq(0).css({opacity:1});//첫 프로모션 목록 보이기
-    function sliderTimer(){
-        autoSlider = setTimeout(function(){
-            promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
-            if(currentIdx == (promotionListLength-1)){
-                currentIdx = 0;
-            }else{
-                    currentIdx++;
-                }
-                promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
-            sliderTimer();
-        },5000);
-    };
-
-    sliderTimer();
-    
+    sliderInterval = setInterval(autoSlider, 4000);
+    function autoSlider(){
+        promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
+        if(currentIdx == (promotionListLength-1)){
+            currentIdx = 0;
+        }else {
+            currentIdx++;
+        }
+        promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
+    }
     //왼쪽버튼
     promotionPrevBtn.on('click',function(a){
+        if(isclick) return;
+        isclick = true;
         a.preventDefault();
+        clearInterval(sliderInterval);
+
         let tempThis = $(this);
-        clearTimeout(autoSlider);
         tempThis.css('pointer-events','none');
         promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
-        if(currentIdx>0){
+        if(currentIdx > 0){
             currentIdx--;
         }else{
             currentIdx = promotionListLength-1;
         }
         promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
         
-        //5초 후 다시 자동슬라이더 시작, 1.5초후 버튼 클릭가능
-        setTimeout(sliderTimer,5000);
-        setTimeout(function(){
+        //1초 후 버튼클릭 + 다시 자동슬라이더 시작
+        setTimeout(() => {
+            isclick = false;
+            sliderInterval = setInterval(autoSlider, 3000);
             tempThis.css('pointer-events','auto');
-        },1500);
+        }, 1000);
     });
 
     //오른쪽버튼
     promotionNextBtn.on('click',function(a){
+        if(isclick) return;
+        isclick = true;
         a.preventDefault();
+        clearInterval(sliderInterval);
+
         let tempThis = $(this);
         tempThis.css('pointer-events','none');
         promotionList.eq(currentIdx).stop(true,true).animate({opacity:0});
-        if(currentIdx==promotionListLength-1){
+        if(currentIdx == promotionListLength - 1){
             currentIdx = 0;
         }else{
             currentIdx++;
         }
         promotionList.eq(currentIdx).stop(true,true).animate({opacity:1});
         
-        //5초 후 다시 자동슬라이더 시작, 1.5초후 버튼 클릭가능
-        setTimeout(sliderTimer,5000);
-        setTimeout(function(){
+        //1초 후 버튼클릭 + 다시 자동슬라이더 시작
+        setTimeout(() => {
+            isclick = false;
+            sliderInterval = setInterval(autoSlider, 3000);
             tempThis.css('pointer-events','auto');
-        },1500);
+        }, 1000);
     });
 })(); // 프로모션 슬라이더 끝
 
@@ -99,37 +104,6 @@ function closeNav($curNavContentsMenu){
      $('body').css('overflow', 'auto');
     overlay.css('visibility','hidden');
 }
-
-// //네비 클로즈버튼
-// //document사용이유 클론시점이랑 dom 생성이 안맞아서 빈객체 현상 발생
-// $(document).on('click', '.closeButton',function(){
-//     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-//     if(isDesktop){ //pc버전일때
-//         closeNav(prevSubMenu);
-//     }else{
-//         const $searchContents = $('.clonedSearchItem .headerGnavContents');
-//         // closeNav($searchContents);
-//         $searchContents.hide();
-//     }
-// });
-
-//서치메뉴만 닫힘 다른것도 다 닫게 해주면 될듯!!
-
-
-
-
-// closeBtn.on('click',function(){
-//     console.log('눌림');
-//     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-//     if(isDesktop){ //pc버전일때
-//         closeNav(prevSubMenu);
-//     }else{
-//         const $searchContents = $searchItem.find('.headerGnavContents');
-//         // closeNav($searchContents);
-//         $searchContents.hide();
-//     }
-// });
-
 
 //장바구니 팝업창
 cartMenu.on('mouseenter',function(){
@@ -179,16 +153,17 @@ let brandStoryMenu = $('.brandStoryMenu');
 let plusBtn = $('.categoryToggleButton');
 let windowWidth = $(window).width();
 let categoryGap = 30;
-
-
 let hasClonedSearchMenu = false;
 let clonedSearchMenuOn = false;
+let openHamburgerGnav = false;
+let $loginClone = null;
 
 hamburgerToggleButton.on('click',function(){
     const brandStoryTop = $('.brandStoryMenu').offset().top;
     windowWidth = $(window).width();
     if(windowWidth<=1023){
         let humburgerBtnOn = $(this).data('open');
+        openHamburgerGnav = true;
         if(clonedSearchMenuOn){//검색창 열린상태면 지워주기
             $('.clonedSearchItem').remove();
             $('clonedLogin').remove();
@@ -201,14 +176,13 @@ hamburgerToggleButton.on('click',function(){
             hamburgerOnButton.css('visibility','visible');
             hamburgerOffButton.css('visibility','hidden');
             hamburgerGnavBackground.css('display','none');
-
         }
-        
 
         if(!humburgerBtnOn){//햄버거 버튼 열기
              $(this).data('open',true);
             humburgerBtnOn = $(this).data('open');
             hamburgerGnav.css('display','block');
+            openHamburgerGnav = true;
             
             hamburgerOnButton.css('visibility','hidden');
             hamburgerOffButton.css('visibility','visible');
@@ -218,31 +192,31 @@ hamburgerToggleButton.on('click',function(){
             $('body').css('overflow', 'hidden');
             hamburgerGnav.find('.headerGnavMainMenu').css('overflow-y','auto');
 
-
-            //검색메뉴
+            //검색메뉴 수정전
             if(!hasClonedSearchMenu){
 
                 const $searchItem = $('.searchNavItem').clone();
                 $searchItem.addClass('clonedSearchItem');
 
                 //검색 카테고리 아래의 로그인메뉴도 복사
-                const $loginClone = $('.login').clone();
-                $loginClone.addClass('clonedLogin');
+                if(!$loginClone){
+                    $loginClone = $('.login').clone();
+                    $loginClone.addClass('clonedLogin');
+                }
                 
-
-
                 const $searchBtn = $searchItem.find('.searchGnavMainItem');
                 const $searchContents = $searchItem.find('.headerGnavContents');
-                const searchCloseBtn = $searchItem.find('.closeButton');
+                const $searchCloseBtn = $searchItem.find('.closeButton');
                 
                 $searchContents.hide();
+                $loginClone.show();
                 $searchContents.find('.searchMenuWrapper').css('display','block');
                 
                 $searchBtn.on('click',function(e){//검색버튼 클릭시
                     e.preventDefault();
 
                     $searchContents.show();
-                    searchCloseBtn.css('visibility','visible');
+                    $searchCloseBtn.css('visibility','visible');
                     
                     hamburgerOnButton.css('visibility','visible');
                     hamburgerOffButton.css('visibility','hidden');
@@ -279,6 +253,7 @@ hamburgerToggleButton.on('click',function(){
             $(this).data('open',false);
             humburgerBtnOn = $(this).data('open');
             hamburgerGnav.css('display','none');
+            openHamburgerGnav = false;
 
             hamburgerOnButton.css('visibility','visible');
             hamburgerOffButton.css('visibility','hidden');
@@ -304,34 +279,6 @@ hamburgerToggleButton.on('click',function(){
 
 //모바일,태블릿 - 햄버거 메뉴 안의 폴딩메뉴 및 브랜드스토리 top위치 재조정 
 $(this).data('open', false);//초기상태 설정
-
-// if(windowWidth<=1023){
-//     plusBtn.on('click', function(){
-//         let minusBtnOn = $(this).data('open');
-//         let currentCategory = $(this).next('ul');
-//         if(minusBtnOn){
-//             $(this).data('open', false);
-//             currentCategory.css('display', 'none');
-//             $(this).children('.plusButton').css('visibility','visible');
-//             $(this).children('.minusButton').css('visibility','hidden');
-//         }
-//         else{
-//             $(this).data('open', true);
-//             currentCategory.css('display', 'block');
-//             $(this).children('.plusButton').css('visibility','hidden');
-//             $(this).children('.minusButton').css('visibility','visible');
-//         }
-
-//         let shoppingMenuHeight = $('.shopping').outerHeight();
-//         let asideHeight = $('.asideMenu').outerHeight();
-//         let brandStoryNewTop = asideHeight + shoppingMenuHeight + categoryGap;
-
-//         brandStoryMenu.css('top', brandStoryNewTop);
-//     });
-// }
-
-
-
 if(windowWidth<=1023){
     plusBtn.on('click', function(){
         let minusBtnOn = $(this).data('open');
@@ -387,6 +334,7 @@ $(window).on('resize', function(){
             hamburgerGnav.css('display','');
             hamburgerToggleButton.data('open',false);
             hamburgerGnavBackground.css('display','none');
+            openHamburgerGnav = false;
             //햄버거 버튼 초기화
             hamburgerOnButton.css('visibility','visible');
             hamburgerOffButton.css('visibility','hidden');
@@ -435,35 +383,32 @@ $(document).on('click', '.closeButton',function(){
         $('.clonedLogin').hide();
         hamburgerGnav.css('display','none');
         hamburgerGnavBackground.css('display','none');
+        openHamburgerGnav = false;
     }
     $('body').css('overflow', 'auto');
 });
-
-
 
 //스티키헤더
 let prevScrollTop = 0;
 let headerHeight = $('header').outerHeight();
 setInterval(function(){
-    let currScrollTop = $(window).scrollTop();
-    
+    let curScrollTop = $(window).scrollTop();
     
     if(scrollDown){
         scrollDown = false;
-        console.log(headerHeight);
-        //스크롤 위로 올릴 때
-        if(currScrollTop > prevScrollTop){
+        //화면 내릴때
+        if(curScrollTop > prevScrollTop && !openHamburgerGnav){
             $('header').animate({top:-headerHeight});
-        }else{//스크롤 아래로 내릴 때
-            if(currScrollTop<=headerHeight+30){
-                //최상단까지 거의 다 왔을때 온전한 헤더 보여주기
+        }else{//화면 올릴때
+            if(curScrollTop<=headerHeight+30){
+                //최상단까지 거의 다 왔을때 온전한 헤더(최상단오토슬라이드+네비) 보여주기
                 $('header').css({top:0});
             }else{
                 //최상단이 아닐때 헤더바텀만 보여주기
                 $('header').animate({top:-50});
             }
         };
-        prevScrollTop = currScrollTop;
+        prevScrollTop = curScrollTop;
     };
 },500);
 
@@ -593,7 +538,6 @@ function initMobileSlider(){
     }
 
     $(document).on('mousemove touchmove', function(e){
-
         if(!isDragging || isAnimating) return;
         let moveX = 0;
         if(e.type === "touchmove"){
@@ -618,43 +562,6 @@ function initMobileSlider(){
         $slideWrapper.css('transition', 'none');
         $slideWrapper.css('transform', `translateX(${curTranslateX + temp}px)`);
     });
-
-    
-     // $(document).on('mousemove touchmove', function(e){ preventDefault는 addEventListener로 관리해야함
-    // document.addEventListener('mousemove touchmove', function(e){
-    //     if(!isDragging || isAnimating) return;
-    //     let moveX = 0;
-    //     let moveY = 0;
-    //     if(e.type === "touchmove"){
-    //         moveX = e.originalEvent.touches[0].clientX;
-    //         moveY = e.originalEvent.touches[0].clientY;
-    //     }else{
-    //         moveX = e.clientX;
-    //         moveY = e.clientY;
-    //     }
-    //     let distanceX = moveX - startX;
-    //     let distanceY = moveY - startY;
-
-    //     if(Math.abs(distanceX) > 10 && Math.abs(distanceX) > Math.abs(distanceY)){
-    //         e.preventDefault();//확실히 가로슬라이드를 처리했을때
-    //     }
-        
-    //     const slideArea = $slideWrapper[0].getBoundingClientRect();
-    //     if(distanceX < -50){
-    //         isDragging = false;
-    //         moveToNextSlide();
-    //         return;
-    //     }
-    //     if(distanceX > 50){
-    //         isDragging = false;
-    //         moveToPrevSlide();
-    //         return;
-    //     }
-
-    //     $slideWrapper.css('transition', 'none');
-    //     $slideWrapper.css('transform', `translateX(${curTranslateX + distanceX}px)`);
-    // },{ passive : false });
-
     
     $(document).on('mouseup touchend',function(e){
         if(!isDragging || isAnimating) return;

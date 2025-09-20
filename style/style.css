@@ -735,7 +735,7 @@ header{
         background: #fcfafa;
         height: 40px;
         line-height: 40px;
-        margin-left: 30px;
+        padding-left: 30px;
     }
     .recommendedSubMenu li{
         max-width: 100%;
@@ -746,6 +746,11 @@ header{
         margin-top: 5px;
         margin-left: 5px;
         fill: #666;
+    }
+    .movileNavSerchIcon{
+        height: 20px;
+        pointer-events: auto;
+        cursor: pointer;
     }
     /* input search 커스텀 */
     .clonedSearchItem .searchPC{
@@ -772,6 +777,10 @@ header{
     /* 자세히보기,쇼핑하기 링크 */
     .promotionList li > a{
         font-size: 12px;
+    }
+    /* input search 커스텀 */
+    .clonedSearchItem .searchPC{
+        width: 85%;
     }
 }
 
@@ -831,7 +840,7 @@ header{
 }
 
 /* 두번째 페이지 데이앤나이트리뉴얼 */
-.bestProductTitle_wrapper > h3{
+.bestProductTitle_wrapper > .sectionTitle{
     margin:100px 0 20px 0;
     font-size: 60px;
     font-weight:400;
@@ -862,7 +871,6 @@ header{
 .imageBoxProjuctList:hover .productImage_hover{
     opacity: 1;
 }
-/* 슬라이드 두번째페이지 고치는중 */
 .bestProducts_container{
     height: 630px;
 }
@@ -918,7 +926,6 @@ header{
 .productSizeBoxSlideBtn .productSizeBoxNextBtn{
     transform: rotate(45deg);
 }
-
 .productItemTitle{
     font-size: 14px;
     font-weight: 500;
@@ -1024,7 +1031,6 @@ header{
 
     .mainSection{
         max-width: 1023px;
-        border: 1px solid red;
     }
     /* 1번째 페이지 메인 */
     .mainContent_wrapper{
@@ -1096,7 +1102,9 @@ header{
 @media (max-width: 767px){
     .mainSection{
         max-width: 1023px;
-        border: 1px solid blue;
+    }
+    .mainSectionMobile{
+        height: fit-content;;
     }
     /* 1번째 페이지 메인 */
     .mainContent_wrapper{
@@ -1139,8 +1147,6 @@ header{
         position: absolute;
         top: 60px;
         width: 100%;
-        /* min-width: 280px; */
-        /* align-self: center; */
     }
     .mainConentRight_vedio{
         flex-shrink: 0;
@@ -1151,21 +1157,7 @@ header{
         padding-top: 90px;
     }
     /* 2번째 페이지 상품리스트 draggable slider 추가  */
-    .bestProductTitle_wrapper > .sectionTitle{
-        margin:100px 0 20px 0;
-        font-size: 60px;
-        font-weight:400;
-        letter-spacing: 0.2px;
-        font-size: clamp(25px , calc(25px + (36 - 25) * ((100vw - 375px) / (768 - 375))), 36px);
-        /* 추가중 */
-    }
-    .bestProductTitle_wrapper p{
-        margin-bottom: 50px;
-        /* 추가중 */
-    }
     .bestProducts_container{
-        height: 630px;
-        /* 추가중 */
         overflow: hidden;
         width: 100%;
         height: 700px;
@@ -1174,9 +1166,7 @@ header{
         top: 0;
     }
     .bestProducts_wrapper{
-        display: flex;
         justify-content: flex-start;
-        /* 추가중 */
         height: 100%;
         position: absolute;
         top: 0;
@@ -1184,12 +1174,9 @@ header{
         touch-action: pan-x;
     }
     .bestProductsSlide{
-        display: flex;
-        flex-direction: column;
         gap: 10px;
-        width: 30%;
         width: auto;
-        /* 추가중 */
+        width: 30%;
         flex:  0 0 calc(100% / 1.5);
         padding-right: 30px; /*슬라이드 간 간격*/
         box-sizing: border-box;
@@ -1197,28 +1184,10 @@ header{
         z-index: 1;
     }
     .imageBoxProjuctList{
-        position: relative;
-        background: #F3F4F6;
-        height: 524px;
-        /* 추가중 */
         width: clamp(200px, calc(200px + (298px - 200px) * ((100vw - 320px) / (768 - 320))), 298px );
         height: auto;
     }
-    .imageBoxProjuctList img{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        /* 추가중 */
-    }
-    .productImage_hover{
-        opacity: 0;
-        transition: opacity 0.2s linear;
-        /* 추가중 */
-    }
-    .imageBoxProjuctList:hover .productImage_hover{
-        opacity: 1;
-        /* 추가중 */
-    }
+   
     /* 메인슬라이드버튼 */
     .arrowBtn{
         width: 20px;
@@ -1240,47 +1209,27 @@ header{
         position: absolute;
         top: clamp(10%, 40vw, 70%);
         left: 5px;
-        z-index: 5;
+        z-index: 3;
         transform: rotate(225deg);
     }
     .arrowBtn .mainSlideNextBtn{
         position: absolute;        
         top: clamp(10%, 40vw, 70%);
         right: 5px;
-        z-index: 5;
+        z-index: 3;
         transform: rotate(45deg);
     }
     .productSizeBoxSlide{
-        /* 수정 끝 */
         display: none;
     }
     .productSizeBox{
-        /* 수정 끝 */
         display: none;
     }
     .productSizeBoxSlideBtn{
-        /* 수정 끝 */
         display: none;
-    }
-    .productItemTitle{
-        font-size: 14px;
-        font-weight: 500;
-        /* 추가중 */
-    }
-    .productItemDesc{
-        font-size: 14px;
-        color: #666;
-        /* 추가중 */
-    }
-    .addtocart_link{
-        margin-top: 20px;
-        font-size: 15px;
-        text-decoration: underline;
-        /* 추가중 */
     }
     /* 3번째 페이지 대표메뉴 바로가기 링크*/
     .productIntro_wrapper{
-        /* 수정 완료 */
         flex-direction: column;
     }
     /* 4번째 페이지 대표제품 설명 */
@@ -1403,6 +1352,9 @@ header{
     color: #666;
     margin-bottom: 10px;
     line-height: 2.0em;
+}
+.infoLinkNum{
+    font-family: "NeueHaasUnicaPro-Regular", sans-serif;
 }
 
 /* footer bottom */
@@ -1527,79 +1479,3 @@ header{
     height: 8px;
     transform: rotate(135deg);
 }
-
-
-
-/* 
-
-$(function () {
-  const $track = $('.track');
-  let $slides = $('.slide');
-  const slideCount = $slides.length;
-  const slideWidth = $slides.outerWidth();
-  let currentIndex = 1;
-
-  // 1. 슬라이드 복제
-  const $firstClone = $slides.first().clone();
-  const $lastClone = $slides.last().clone();
-
-  $track.append($firstClone); // 끝에 첫 번째 복제
-  $track.prepend($lastClone); // 앞에 마지막 복제
-
-  $slides = $('.slide'); // 슬라이드 배열 갱신
-  $track.css('transform', `translateX(-${slideWidth * currentIndex}px)`);
-
-  let isDragging = false;
-  let startX = 0;
-  let currentX = 0;
-
-  // 드래그 시작
-  $track.on('mousedown touchstart', function (e) {
-    isDragging = true;
-    startX = e.pageX || e.originalEvent.touches[0].pageX;
-    $track.css('transition', 'none');
-  });
-
-  // 드래그 이동
-  $(document).on('mousemove touchmove', function (e) {
-    if (!isDragging) return;
-    currentX = e.pageX || e.originalEvent.touches[0].pageX;
-    let dx = currentX - startX;
-    $track.css('transform', `translateX(${ -currentIndex * slideWidth + dx }px)`);
-  });
-
-  // 드래그 끝
-  $(document).on('mouseup touchend', function (e) {
-    if (!isDragging) return;
-    isDragging = false;
-    let dx = (e.pageX || e.originalEvent.changedTouches[0].pageX) - startX;
-
-    if (dx < -50) {
-      currentIndex++;
-    } else if (dx > 50) {
-      currentIndex--;
-    }
-
-    $track.css('transition', 'transform 0.3s ease');
-    $track.css('transform', `translateX(-${slideWidth * currentIndex}px)`);
-
-    // transition 끝난 후 복제 위치 조정
-    $track.one('transitionend', function () {
-      if (currentIndex === 0) {
-        currentIndex = slideCount;
-        $track.css('transition', 'none');
-        $track.css('transform', `translateX(-${slideWidth * currentIndex}px)`);
-      }
-      if (currentIndex === $slides.length - 1) {
-        currentIndex = 1;
-        $track.css('transition', 'none');
-        $track.css('transform', `translateX(-${slideWidth * currentIndex}px)`);
-      }
-    });
-  });
-});
-
-
-
-
-*/
