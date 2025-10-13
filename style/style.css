@@ -74,6 +74,7 @@ body{
 /* 지금쇼핑하기 링크 및 위치잡기 */
 .productDescBottom{
     position: relative;
+    width: fit-content;
 }
 .shopNowLink{
     position: absolute;
@@ -97,35 +98,19 @@ input[type="email"],[type="tel"]{
     outline: none;
 }
 
-
-/* input[type="search"]{
-    border: none;
-    border-bottom: 1px solid #aaa;
-    width: 900px;
-    text-align: center;
-    padding: 15px;
-    margin-top: 0px;
-    font-size: 15px;
-}
-input[type="search"]::-webkit-search-cancel-button{
-    display: none;
-} */
-
 input[type="search"]{
+    display: block;
     border: none;
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
     width: 950px;
     padding: 15px;
-    margin-top: -10px;
     font-size: 20px;
+    margin: 0 auto;
 }
 input[type="search"]::-webkit-search-cancel-button{
     display: none;
 }
-
-
-
 
 
 /* radio 버튼 컬러변경 */
@@ -280,8 +265,8 @@ header{
     z-index: 3;
 }
 .searchCloseButton{
-    top: 15px;
-    right: 5px;
+    top: 25px;
+    right: 2%;
 }
 .closeButton:before, .closeButton:after {
     content: '';
@@ -416,7 +401,6 @@ header{
     width: 100px;
     margin-right: 40px;
     flex-shrink: 0;
-
 }
 
 /* 검색 네비게이션 */
@@ -437,7 +421,6 @@ header{
     padding-top: 10px;
     z-index: 2;
     background: #fff;
-    /* border: 1px solid red; */
 }
 .recommendedMenu{
     display: flex;
@@ -507,6 +490,17 @@ header{
 /* -----------모바일/태블릿 767px~1023px 헤더 --------------------*/
 
 @media (max-width: 1023px){
+    /* 헤더탑(프로모션슬라이더) 위치 재조정*/
+    .promotionWrapper{
+        padding: 0 20px;
+    }
+    /* 자세히보기,쇼핑하기 링크 */
+    .promotionList li > a{
+        font-size: 12px;
+    }
+    .login{
+        display: none;
+    }
     .PCVersionGnavHover{
         visibility: hidden; 
     }
@@ -754,34 +748,25 @@ header{
     }
     /* input search 커스텀 */
     .clonedSearchItem .searchPC{
-        width: 95%;
         border-top: none;
         border-bottom: 1px solid #585858;
         text-align: center;
         margin-top: 0px;
         font-size: 15px;
-        margin-left: 30px;
-        margin-right: 30px;
+        /*  */
+        width: clamp(300px,90vw, 900px);
+    }
+    .searchCloseButton{
+        top: 17px;
+        right: 1%;
     }
     .gnavOverlay{
         pointer-events: none;
         display: none;
     }
 }
-/* -----------모바일767px 상단슬라이드 헤더--------------------*/
-@media (max-width : 766px){
-    /* 헤더탑(프로모션슬라이더) 위치 재조정*/
-    .promotionWrapper{
-        padding: 0 20px;
-    }
-    /* 자세히보기,쇼핑하기 링크 */
-    .promotionList li > a{
-        font-size: 12px;
-    }
-    /* input search 커스텀 */
-    .clonedSearchItem .searchPC{
-        width: 85%;
-    }
+@media (max-width : 1023px){
+    
 }
 
 /* MainContents */
@@ -873,6 +858,7 @@ header{
 }
 .bestProducts_container{
     height: 630px;
+    /* display: flex; */
 }
 .bestProducts_wrapper{
     display: flex;
@@ -881,7 +867,7 @@ header{
 .bestProductsSlide{
     display: flex;
     flex-direction: column;
-    width: 33%;
+    width: 30%;
 }
 /* 모바일용 슬라이드 버튼 */
 .mainSlidePrevBtn, .mainSlideNextBtn{
@@ -893,6 +879,7 @@ header{
     justify-content: flex-start;
     gap: 10px;
     width: 100%;
+    overflow: hidden;
 }
 .productSizeBox li{
     display: block;
@@ -912,7 +899,6 @@ header{
 }
 .productSizeBoxSlideBtn{
     margin-top: 20px;
-    display: none;
 }
 .productSizeBoxSlideBtn a{
     width: 10px;
@@ -925,6 +911,9 @@ header{
 }
 .productSizeBoxSlideBtn .productSizeBoxNextBtn{
     transform: rotate(45deg);
+}
+.productSizeBoxSlide .productSizeBox{
+    padding: 0 10px;
 }
 .productItemTitle{
     font-size: 14px;
@@ -939,6 +928,13 @@ header{
     font-size: 15px;
     text-decoration: underline;
 }
+.imageBoxProjuctList{
+        width: 100%;
+        height: auto;
+        aspect-ratio: 421/524;
+        object-fit: cover;
+    }
+
 /* 세번째 페이지 대표제품 및 베스트셀러 바로가기 링크 */
 .productDescription> div > h3{
     font-weight:500;
@@ -1026,7 +1022,7 @@ header{
 .serviceGuide_wrapper .readMoreLink{
     margin-top: 5px;
 }
-/* 테블릿형 767px~1023px 메인 */
+/* 테블릿형 768px~1023px 메인 */
 @media (max-width: 1023px){
 
     .mainSection{
@@ -1077,16 +1073,6 @@ header{
     /* 모바일용 슬라이드 버튼 */
     .mainSlidePrevBtn, .mainSlideNextBtn{
         display: none;
-    }
-    /* 제품용량박스 */
-    .productSizeBox{
-        overflow: hidden;
-    }
-    .productSizeBoxSlideBtn{
-        display: block;
-    }
-    .productSizeBoxSlide .productSizeBox{
-        padding: 0 10px;
     }
     /* 3번째 페이지 대표메뉴 바로가기 링크*/
     .mainSection:nth-child(3){
