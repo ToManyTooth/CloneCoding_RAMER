@@ -8,27 +8,27 @@ strong{font-weight: bold;}
     font-family: "LaMerText-Regular";
     font-display: swap;
     font-style: normal;
-    src: url(/fonts/LaMerText-Regular.woff2) format("woff2");
+    src: url("../fonts/LaMerText-Regular.woff2") format("woff2");
 }
 @font-face {
     font-family: "NeueHaasUnicaPro-Regular";
     font-display: swap;
     font-style: normal;
-    src: url(/fonts/NeueHaasUnicaPro-Regular.woff2) format("woff2");
+    src: url("../fonts/NeueHaasUnicaPro-Regular.woff2") format("woff2");
 }
 @font-face {
     font-family: "La Mer Headline KR";
     font-display: swap;
     font-style: normal;
     font-weight: 400;
-    src: url(/fonts/LaMerHeadline-Black.woff2) format("woff2");
+    src: url("../fonts/LaMerHeadline-Black.woff2") format("woff2");
 }
 @font-face {
     font-family: "La Mer Headline KR";
     font-display: swap;
     font-style: italic;
     font-weight: 400;
-    src: url(/fonts/LaMerHeadline-BlackItalic.woff2) format("woff2");
+    src: url("../fonts/LaMerHeadline-BlackItalic.woff2") format("woff2");
 }
 
 body{
@@ -773,11 +773,10 @@ header{
 .mainSection{
     width: 100%;
     max-width: 1440px;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin: 0 auto;
     margin-bottom: 80px;/* 한섹션간의 간격 80px */
     padding: 0 20px;
-    /* border: 1px solid tomato; */
 }
 /* 섹션별 타이틀 기본스타일 */
 .sectionTitle{
@@ -1301,10 +1300,10 @@ header{
     font-size: 15px;
     letter-spacing: -0.03rem;
 }
-.newsletterButton span{
+.newsletterButton label{
     font-size: 15px;
 }
-.privacyButton span{
+.privacyButton label{
     font-size: 13px;
 }
 .agreementDetails{

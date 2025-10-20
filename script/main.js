@@ -362,17 +362,12 @@ $(window).on('resize', function(){
 //네비 클로즈버튼
 //document사용이유 클론시점이랑 dom 생성이 안맞아서 빈객체 현상 발생
 $(document).on('click', '.closeButton',function(){
-        console.log('클로즈버튼 눌림');
     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
     if(isDesktop){ //pc버전일때
-            console.log('PC클로즈버튼 눌림');
-
         prevSubMenu.css('visibility','hidden');
         $('body').css('overflow', 'auto');// 10.03추가했음
         overlay.css('visibility','hidden');
     }else{
-            console.log('MOBILE클로즈버튼 눌림');
-
         const $searchContents = $('.clonedSearchItem .headerGnavContents');
         $searchContents.hide();
         $('.clonedLogin').hide();

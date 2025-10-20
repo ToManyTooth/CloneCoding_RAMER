@@ -4,11 +4,11 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="./style/style.css">
+            <link rel="stylesheet" href="style/style.css">
             <!-- 파비콘 에러 방지 -->
-             <!-- <link rel="shortcut icon" href="#"> -->
-             <link rel="icon" href="data:;base64,iVBORw0Kgo=">
-             <!-- # 컨트롤러 중복 방지 코드-->
+            <!-- <link rel="shortcut icon" href="#"> -->
+            <link rel="icon" href="data:;base64,iVBORw0Kgo=">
+            <!-- # 컨트롤러 중복 방지 코드-->
             <title>LAMER</title>
         </head>
         <body>
@@ -331,15 +331,15 @@
                                 </div>
                             </div>
                             <div class="mainConentRight_vedio">
-                                <video loop="false" autoplay="false" width="720" height="900">
+                                <video loop autoplay width="720" height="900">
                                     <source src="https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_01.mp4">
                                 </video>
                             </div>
                         </div>
                     </section>
-                    <section class = "mainSection mainSectionMobile">
+                    <section class = "mainSection mainSectionMobile scrollAnimate">
                         <h2 class="visuallyHidden">bestProductList</h2>
-                        <div class="bestProductTitle_wrapper scrollAnimate">
+                        <div class="bestProductTitle_wrapper">
                             <h3 class="sectionTitle">데이 &amp; 나이트 리뉴얼 <em>with</em> 라 메르</h3>
                             <p>바다의 강인한 생명력,
                                 <br>미라클 브로스로 완성하는 힐링 에너지를 경험해보세요.
@@ -425,7 +425,7 @@
                             <ul>
                                 <li>
                                     <div class="video">
-                                        <video loop="false" autoplay="false" width="720" height="900">
+                                        <video loop autoplay width="720" height="900">
                                             <source src="https://www.lamerkorea.com/media/export/cms/homepage/2024/NOV24/LM_1104_main_02_rejuvenating%20cream.mp4">
                                         </video>
                                     </div>
@@ -468,7 +468,7 @@
                                         </div>
                                     </div>
                                     <div class="video">
-                                        <video loop="false" autoplay="false" muted width="720" height="900">
+                                        <video loop autoplay muted width="720" height="900">
                                             <source src="https://www.lamerkorea.com/media/export/cms/homepage/2025/APR25/LM_0401_main_05.mp4">
                                         </video>
                                     </div>
@@ -580,12 +580,15 @@
                                     <br>
                                 뉴스레터 수신</p>
                                 <!-- 동의 밑 이메일 전화번호 기록 -->
-                                 <label class="newsletterButton">
-                                     <input type='radio' name="newsletterConsent" value="agreeNewsletter"><span> 동의함</span>                                     
-                                     <input type='radio' name="newsletterConsent" value="disagreeNewsletter"><span> 동의하지 않음</span>
-                                 </label>
+                                 <div class="newsletterButton">
+                                    <input type='radio' id="agreeNewsletter" name="newsletterConsent" value="agreeNewsletter">
+                                    <label for="agreeNewsletter">동의함</label>
+
+                                    <input type='radio' id="disagreeNewsletter" name="newsletterConsent" value="disagreeNewsletter">
+                                    <label for="disagreeNewsletter">동의 하지 않음</label>
+                                 </div>
                                  <input type="email" placeholder="이메일">
-                                 <input type="tel"placeholder="전화번호 (선택)">
+                                 <input type="tel" placeholder="전화번호 (선택)">
                                 <p  class="agreementDetails">개인정보의 수집 및 이용에 대한 동의 (필수)
                                     <br>
                                     수집항목: 이메일, 전화번호(선택항목)
@@ -601,10 +604,13 @@
                                     는 개인정보 항목 등 국외이전 관련한 자세한 내용은 개인정
                                     보처리방침을 통해 확인 가능합니다.
                                 </p>
-                                <label class="privacyButton">
-                                    <input type='radio' name="privacyConsent" value="agreePrivacy"><span> 동의함</span>                                 
-                                    <input type='radio' name="privacyConsent" value="disagreePrivacy"><span> 동의하지 않음</span>                                
-                                </label>
+                                <div class="privacyButton">
+                                    <input type='radio' id="agreePrivacy" name="privacyConsent" value="agreePrivacy">                                 
+                                    <label for="agreePrivacy">동의함</label>
+
+                                    <input type='radio' id="disagreePrivacy" name="privacyConsent" value="disagreePrivacy">                               
+                                    <label for="disagreePrivacy">동의 하지 않음</label>
+                                </div>
                                  <a href="javascript:void(0)" class="signUpButton">가입하기</a>
                             </div>
                             <aside class="infoMenu">
@@ -682,6 +688,6 @@
                 <a href="javascript:void(0)"><img src="https://www.lamerkorea.com/media/export/cms/live_chat_icon_100x100.jpg" alt="상담원연결채팅창"></a>
             </div>
             <button class="backToTopButton"></button>
-            <script src="/script/main.js"></script>
+            <script src="script/main.js"></script>
         </body>    
     </html>
